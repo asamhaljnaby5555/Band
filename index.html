@@ -14,6 +14,7 @@
             --light-gray: #f5f5f5;
             --dark-purple: #4b0082;
             --gold: #FFD700;
+            --sidebar-width: 250px;
         }
         
         * {
@@ -106,6 +107,7 @@
         .user-menu {
             position: relative;
             display: none;
+            align-items: center;
         }
         
         .menu-icon {
@@ -147,7 +149,6 @@
             border-radius: 20px;
             font-weight: bold;
             margin-left: 15px;
-            display: none;
         }
         
         /* قسم الهيرو */
@@ -170,7 +171,7 @@
             line-height: 1.6;
         }
         
-        /* نموذج الطلب */
+        /* نماذج الموقع */
         .form-container {
             background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
@@ -284,7 +285,32 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* نماذج أخرى */
+        /* صفحة تسجيل الدخول */
+        .login-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 0 auto;
+            border: 1px solid var(--purple);
+            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
+            max-width: 500px;
+            display: none;
+        }
+        
+        .captcha-box {
+            background: rgba(50, 50, 50, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: var(--gold);
+            user-select: none;
+        }
+        
+        /* النوافذ المنبثقة */
         .modal {
             display: none;
             position: fixed;
@@ -332,29 +358,100 @@
             transform: translateY(-3px);
         }
         
-        /* صفحة تسجيل الدخول */
-        .login-container {
+        /* لوحة الأدمن */
+        .admin-panel {
+            display: none;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
             padding: 30px;
-            margin: 0 auto;
+            margin-bottom: 40px;
             border: 1px solid var(--purple);
             box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
-            max-width: 500px;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--purple);
+        }
+        
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-tab {
+            padding: 10px 20px;
+            background: rgba(106, 13, 173, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-tab.active {
+            background: var(--purple);
+        }
+        
+        .admin-tab:hover {
+            background: var(--purple);
+        }
+        
+        .admin-content {
             display: none;
         }
         
-        .captcha-box {
-            background: rgba(50, 50, 50, 0.8);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
+        .admin-content.active {
+            display: block;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
             margin: 20px 0;
-            font-size: 24px;
+            background: rgba(50, 50, 50, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #333;
+        }
+        
+        .data-table th {
+            background: var(--purple);
+            color: var(--white);
+        }
+        
+        .data-table tr:hover {
+            background: rgba(106, 13, 173, 0.1);
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: bold;
-            letter-spacing: 5px;
-            color: var(--gold);
-            user-select: none;
+        }
+        
+        .status-pending {
+            background: #ff9800;
+            color: #000;
+        }
+        
+        .status-completed {
+            background: #4caf50;
+            color: #fff;
+        }
+        
+        .status-cancelled {
+            background: #f44336;
+            color: #fff;
         }
         
         footer {
@@ -396,6 +493,14 @@
             .form-title {
                 font-size: 22px;
             }
+            
+            .data-table {
+                font-size: 14px;
+            }
+            
+            .data-table th, .data-table td {
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
@@ -436,6 +541,7 @@
             <p>نقدم خدمة استرجاع حسابات انستقرام المحظورة باحترافية عالية ونسبة نجاح تتجاوز 95%. فريقنا يعمل على مدار الساعة لمساعدتك في استعادة حسابك.</p>
         </section>
         
+        <!-- نموذج طلب الاسترجاع -->
         <div class="form-container" id="requestForm">
             <h2 class="form-title">طلب استرجاع الحساب</h2>
             <form id="recovery-form">
@@ -487,6 +593,7 @@
             </form>
         </div>
         
+        <!-- نموذج تسجيل الدخول -->
         <div class="login-container" id="loginForm">
             <h2 class="form-title">تسجيل الدخول</h2>
             <form id="login-form">
@@ -516,6 +623,7 @@
             </p>
         </div>
         
+        <!-- نموذج إنشاء حساب -->
         <div class="login-container" id="registerForm">
             <h2 class="form-title">إنشاء حساب جديد</h2>
             <form id="register-form">
@@ -547,6 +655,123 @@
             <p style="margin-top: 20px; color: #ccc;">
                 لديك حساب already؟ <a href="#" onclick="showLogin()" style="color: var(--purple);">تسجيل الدخول</a>
             </p>
+        </div>
+        
+        <!-- لوحة تحكم الأدمن -->
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-header">
+                <h2>لوحة تحكم الأدمن</h2>
+                <button class="btn btn-secondary" onclick="adminLogout()">تسجيل خروج</button>
+            </div>
+            
+            <div class="admin-tabs">
+                <div class="admin-tab active" data-tab="users">المستخدمين</div>
+                <div class="admin-tab" data-tab="requests">طلبات الاسترجاع</div>
+                <div class="admin-tab" data-tab="support">طلبات الدعم</div>
+                <div class="admin-tab" data-tab="codes">أكواد الشحن</div>
+                <div class="admin-tab" data-tab="stats">الإحصائيات</div>
+            </div>
+            
+            <div class="admin-content active" id="usersTab">
+                <h3>إدارة المستخدمين</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>اسم المستخدم</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>رصيده</th>
+                            <th>عدد الطلبات</th>
+                            <th>تاريخ التسجيل</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- سيتم ملء هذا الجدول بالبيانات -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="admin-content" id="requestsTab">
+                <h3>طلبات استرجاع الحسابات</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>المستخدم</th>
+                            <th>حساب الانستقرام</th>
+                            <th>نوع الحظر</th>
+                            <th>التاريخ</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requestsTableBody">
+                        <!-- سيتم ملء هذا الجدول بالبيانات -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="admin-content" id="supportTab">
+                <h3>طلبات الدعم الفني</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>المستخدم</th>
+                            <th>الموضوع</th>
+                            <th>التاريخ</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="supportTableBody">
+                        <!-- سيتم ملء هذا الجدول بالبيانات -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="admin-content" id="codesTab">
+                <h3>إدارة أكواد الشحن</h3>
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="generateChargeCode()">
+                        <i class="fas fa-plus"></i> إنشاء كود شحن جديد
+                    </button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>كود الشحن</th>
+                            <th>القيمة</th>
+                            <th>الحالة</th>
+                            <th>تاريخ الإنشاء</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="codesTableBody">
+                        <!-- سيتم ملء هذا الجدول بالبيانات -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="admin-content" id="statsTab">
+                <h3>إحصائيات الموقع</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                    <div style="background: rgba(106, 13, 173, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3 id="totalUsers">0</h3>
+                        <p>إجمالي المستخدمين</p>
+                    </div>
+                    <div style="background: rgba(106, 13, 173, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3 id="totalRequests">0</h3>
+                        <p>إجمالي الطلبات</p>
+                    </div>
+                    <div style="background: rgba(106, 13, 173, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3 id="completedRequests">0</h3>
+                        <p>الطلبات المكتملة</p>
+                    </div>
+                    <div style="background: rgba(106, 13, 173, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3 id="totalRevenue">0 $</h3>
+                        <p>إجمالي الإيرادات</p>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <footer>
@@ -606,6 +831,36 @@
     </div>
 
     <script>
+        // قاعدة البيانات المحلية
+        function initDatabase() {
+            if (!localStorage.getItem('users')) {
+                // إنشاء حساب الأدمن الافتراضي
+                const adminUser = {
+                    id: 1,
+                    username: '5t_o1',
+                    password: '1122334455mmnn',
+                    email: 'admin@astrh.com',
+                    balance: 0,
+                    isAdmin: true,
+                    registrationDate: new Date().toISOString()
+                };
+                
+                localStorage.setItem('users', JSON.stringify([adminUser]));
+            }
+            
+            if (!localStorage.getItem('chargeCodes')) {
+                localStorage.setItem('chargeCodes', JSON.stringify([]));
+            }
+            
+            if (!localStorage.getItem('recoveryRequests')) {
+                localStorage.setItem('recoveryRequests', JSON.stringify([]));
+            }
+            
+            if (!localStorage.getItem('supportRequests')) {
+                localStorage.setItem('supportRequests', JSON.stringify([]));
+            }
+        }
+        
         // توليد كابتشا عشوائي
         function generateCaptcha() {
             const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -624,6 +879,7 @@
             document.getElementById('loginForm').style.display = 'block';
             document.getElementById('registerForm').style.display = 'none';
             document.getElementById('requestForm').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'none';
             currentCaptcha = generateCaptcha();
         }
         
@@ -631,14 +887,26 @@
             document.getElementById('registerForm').style.display = 'block';
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('requestForm').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'none';
         }
         
         function showRequestForm() {
             document.getElementById('requestForm').style.display = 'block';
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'none';
             document.getElementById('authButtons').style.display = 'none';
             document.getElementById('userMenu').style.display = 'flex';
+        }
+        
+        function showAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('requestForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('userMenu').style.display = 'none';
+            loadAdminData();
         }
         
         // القائمة المنسدلة
@@ -689,15 +957,22 @@
                 return;
             }
             
-            // محاكاة عملية تسجيل الدخول
-            if (username && password) {
-                // حفظ حالة المستخدم
-                localStorage.setItem('userLoggedIn', 'true');
-                localStorage.setItem('username', username);
-                localStorage.setItem('userBalance', '100'); // رصيد افتراضي
+            // البحث عن المستخدم في قاعدة البيانات
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                // حفظ حالة تسجيل الدخول
+                localStorage.setItem('currentUser', JSON.stringify(user));
                 
-                showRequestForm();
-                document.getElementById('balanceAmount').textContent = localStorage.getItem('userBalance');
+                if (user.isAdmin) {
+                    showAdminPanel();
+                } else {
+                    showRequestForm();
+                    document.getElementById('balanceAmount').textContent = user.balance || 0;
+                }
+            } else {
+                alert('اسم المستخدم أو كلمة المرور غير صحيحة');
             }
         });
         
@@ -715,29 +990,64 @@
                 return;
             }
             
-            // محاكاة عملية التسجيل
-            if (username && email && password) {
-                alert('تم إنشاء حسابك بنجاح! يرجى تسجيل الدخول الآن.');
-                showLogin();
+            // التحقق من عدم وجود مستخدم بنفس الاسم
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userExists = users.some(u => u.username === username);
+            
+            if (userExists) {
+                alert('اسم المستخدم موجود مسبقاً، يرجى اختيار اسم آخر');
+                return;
             }
+            
+            // إنشاء حساب جديد
+            const newUser = {
+                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 2,
+                username,
+                email,
+                password,
+                balance: 0,
+                isAdmin: false,
+                registrationDate: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            alert('تم إنشاء حسابك بنجاح! يرجى تسجيل الدخول الآن.');
+            showLogin();
         });
         
         // إرسال طلب الاسترجاع
         document.getElementById('recovery-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const balance = parseInt(localStorage.getItem('userBalance') || '0');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
             
-            if (balance < 15) {
+            if (!currentUser.id) {
+                alert('يجب تسجيل الدخول أولاً');
+                showLogin();
+                return;
+            }
+            
+            if (currentUser.balance < 15) {
                 alert('رصيدك غير كافٍ لإنشاء طلب جديد. يرجى شحن الرصيد.');
                 showChargeModal();
                 return;
             }
             
             // خصم 15 دولار
-            const newBalance = balance - 15;
-            localStorage.setItem('userBalance', newBalance.toString());
-            document.getElementById('balanceAmount').textContent = newBalance;
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1) {
+                users[userIndex].balance -= 15;
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // تحديث المستخدم الحالي
+                currentUser.balance = users[userIndex].balance;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                document.getElementById('balanceAmount').textContent = currentUser.balance;
+            }
             
             // جمع بيانات النموذج
             const formData = {
@@ -749,13 +1059,19 @@
             };
             
             // حفظ الطلب
-            const requests = JSON.parse(localStorage.getItem('userRequests') || '[]');
-            requests.push({
+            const requests = JSON.parse(localStorage.getItem('recoveryRequests') || '[]');
+            const newRequest = {
+                id: requests.length > 0 ? Math.max(...requests.map(r => r.id)) + 1 : 1,
+                userId: currentUser.id,
+                username: currentUser.username,
                 ...formData,
                 date: new Date().toLocaleDateString(),
-                status: 'قيد التنفيذ'
-            });
-            localStorage.setItem('userRequests', JSON.stringify(requests));
+                status: 'قيد التنفيذ',
+                createdAt: new Date().toISOString()
+            };
+            
+            requests.push(newRequest);
+            localStorage.setItem('recoveryRequests', JSON.stringify(requests));
             
             // إظهار رسالة النجاح
             alert('تم إرسال طلبك بنجاح وخصم 15$ من رصيدك. سيتم مراجعة طلبك خلال 24 ساعة.');
@@ -767,34 +1083,82 @@
         // شحن الرصيد
         function chargeAccount() {
             const chargeCode = document.getElementById('chargeCode').value;
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            if (!currentUser.id) {
+                alert('يجب تسجيل الدخول أولاً');
+                return;
+            }
             
             if (!chargeCode || chargeCode.length !== 16) {
                 alert('كود الشحن يجب أن يكون مكون من 16 حرف/رقم');
                 return;
             }
             
-            // محاكاة عملية الشحن
-            const currentBalance = parseInt(localStorage.getItem('userBalance') || '0');
-            const newBalance = currentBalance + 50; // إضافة 50 دولار لكل كود
-            localStorage.setItem('userBalance', newBalance.toString());
-            document.getElementById('balanceAmount').textContent = newBalance;
+            // البحث عن كود الشحن
+            const chargeCodes = JSON.parse(localStorage.getItem('chargeCodes') || '[]');
+            const codeIndex = chargeCodes.findIndex(c => c.code === chargeCode && !c.used);
             
-            alert('تم شحن 50$ إلى رصيدك بنجاح!');
-            closeModal('chargeModal');
-            document.getElementById('chargeCode').value = '';
+            if (codeIndex === -1) {
+                alert('كود الشحن غير صالح أو مستخدم مسبقاً');
+                return;
+            }
+            
+            // استخدام الكود وإضافة الرصيد
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1) {
+                users[userIndex].balance += chargeCodes[codeIndex].amount;
+                chargeCodes[codeIndex].used = true;
+                chargeCodes[codeIndex].usedBy = currentUser.id;
+                chargeCodes[codeIndex].usedAt = new Date().toISOString();
+                
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('chargeCodes', JSON.stringify(chargeCodes));
+                
+                // تحديث المستخدم الحالي
+                currentUser.balance = users[userIndex].balance;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                document.getElementById('balanceAmount').textContent = currentUser.balance;
+                
+                alert(`تم شحن ${chargeCodes[codeIndex].amount}$ إلى رصيدك بنجاح!`);
+                closeModal('chargeModal');
+                document.getElementById('chargeCode').value = '';
+            }
         }
         
         // إرسال طلب الدعم
         function sendSupportRequest() {
             const subject = document.getElementById('supportSubject').value;
             const message = document.getElementById('supportMessage').value;
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            if (!currentUser.id) {
+                alert('يجب تسجيل الدخول أولاً');
+                return;
+            }
             
             if (!subject || !message) {
                 alert('يرجى ملء جميع الحقول');
                 return;
             }
             
-            // محاكاة إرسال طلب الدعم
+            // حفظ طلب الدعم
+            const supportRequests = JSON.parse(localStorage.getItem('supportRequests') || '[]');
+            supportRequests.push({
+                id: supportRequests.length > 0 ? Math.max(...supportRequests.map(s => s.id)) + 1 : 1,
+                userId: currentUser.id,
+                username: currentUser.username,
+                subject,
+                message,
+                status: 'مفتوح',
+                date: new Date().toLocaleDateString(),
+                createdAt: new Date().toISOString()
+            });
+            
+            localStorage.setItem('supportRequests', JSON.stringify(supportRequests));
+            
             alert('تم إرسال رسالتك إلى الدعم الفني. سيتم الرد عليك خلال 24 ساعة.');
             closeModal('supportModal');
             document.getElementById('supportSubject').value = '';
@@ -803,16 +1167,18 @@
         
         // تحميل الطلبات السابقة
         function loadRequests() {
-            const requests = JSON.parse(localStorage.getItem('userRequests') || '[]');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const requests = JSON.parse(localStorage.getItem('recoveryRequests') || '[]');
+            const userRequests = requests.filter(r => r.userId === currentUser.id);
             const requestsList = document.getElementById('requestsList');
             
-            if (requests.length === 0) {
+            if (userRequests.length === 0) {
                 requestsList.innerHTML = '<p style="color: #ccc; text-align: center; padding: 20px;">لا توجد طلبات سابقة</p>';
                 return;
             }
             
             requestsList.innerHTML = '';
-            requests.forEach((request, index) => {
+            userRequests.forEach((request, index) => {
                 const requestItem = document.createElement('div');
                 requestItem.style.background = 'rgba(50, 50, 50, 0.5)';
                 requestItem.style.padding = '15px';
@@ -831,11 +1197,127 @@
             });
         }
         
+        // تحميل بيانات الأدمن
+        function loadAdminData() {
+            // تحميل المستخدمين
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const usersTable = document.getElementById('usersTableBody');
+            usersTable.innerHTML = '';
+            
+            users.forEach(user => {
+                if (!user.isAdmin) {
+                    const userRequests = JSON.parse(localStorage.getItem('recoveryRequests') || '[]')
+                        .filter(r => r.userId === user.id);
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.balance || 0} $</td>
+                        <td>${userRequests.length}</td>
+                        <td>${new Date(user.registrationDate).toLocaleDateString()}</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">تفاصيل</button>
+                        </td>
+                    `;
+                    usersTable.appendChild(row);
+                }
+            });
+            
+            // تحميل الطلبات
+            const requests = JSON.parse(localStorage.getItem('recoveryRequests') || '[]');
+            const requestsTable = document.getElementById('requestsTableBody');
+            requestsTable.innerHTML = '';
+            
+            requests.forEach(request => {
+                const user = users.find(u => u.id === request.userId);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user ? user.username : 'غير معروف'}</td>
+                    <td>${request.username}</td>
+                    <td>${request.banType}</td>
+                    <td>${request.date}</td>
+                    <td><span class="status-badge status-pending">${request.status}</span></td>
+                    <td>
+                        <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">تعديل</button>
+                    </td>
+                `;
+                requestsTable.appendChild(row);
+            });
+            
+            // تحميل طلبات الدعم
+            const supportRequests = JSON.parse(localStorage.getItem('supportRequests') || '[]');
+            const supportTable = document.getElementById('supportTableBody');
+            supportTable.innerHTML = '';
+            
+            supportRequests.forEach(request => {
+                const user = users.find(u => u.id === request.userId);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user ? user.username : 'غير معروف'}</td>
+                    <td>${request.subject}</td>
+                    <td>${request.date}</td>
+                    <td><span class="status-badge status-pending">${request.status}</span></td>
+                    <td>
+                        <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">رد</button>
+                    </td>
+                `;
+                supportTable.appendChild(row);
+            });
+            
+            // تحميل أكواد الشحن
+            const chargeCodes = JSON.parse(localStorage.getItem('chargeCodes') || '[]');
+            const codesTable = document.getElementById('codesTableBody');
+            codesTable.innerHTML = '';
+            
+            chargeCodes.forEach(code => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${code.code}</td>
+                    <td>${code.amount} $</td>
+                    <td>${code.used ? 'مستخدم' : 'نشط'}</td>
+                    <td>${new Date(code.createdAt).toLocaleDateString()}</td>
+                    <td>
+                        <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">نسخ</button>
+                    </td>
+                `;
+                codesTable.appendChild(row);
+            });
+            
+            // تحميل الإحصائيات
+            document.getElementById('totalUsers').textContent = users.filter(u => !u.isAdmin).length;
+            document.getElementById('totalRequests').textContent = requests.length;
+            document.getElementById('completedRequests').textContent = requests.filter(r => r.status === 'مكتمل').length;
+            
+            const totalRevenue = requests.length * 15;
+            document.getElementById('totalRevenue').textContent = `${totalRevenue} $`;
+        }
+        
+        // إنشاء كود شحن جديد
+        function generateChargeCode() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let code = "";
+            for (let i = 0; i < 16; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            const chargeCodes = JSON.parse(localStorage.getItem('chargeCodes') || '[]');
+            chargeCodes.push({
+                code,
+                amount: 50,
+                used: false,
+                createdAt: new Date().toISOString()
+            });
+            
+            localStorage.setItem('chargeCodes', JSON.stringify(chargeCodes));
+            loadAdminData();
+            
+            alert(`تم إنشاء كود الشحن: ${code}`);
+        }
+        
         // تسجيل الخروج
         function logout() {
-            localStorage.removeItem('userLoggedIn');
-            localStorage.removeItem('username');
-            localStorage.removeItem('userBalance');
+            localStorage.removeItem('currentUser');
             document.getElementById('userMenu').style.display = 'none';
             document.getElementById('authButtons').style.display = 'flex';
             document.getElementById('requestForm').style.display = 'none';
@@ -844,13 +1326,38 @@
             document.getElementById('dropdownMenu').style.display = 'none';
         }
         
+        function adminLogout() {
+            localStorage.removeItem('currentUser');
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('authButtons').style.display = 'flex';
+        }
+        
+        // تبديل علامات التبويب في لوحة الأدمن
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab + 'Tab').classList.add('active');
+            });
+        });
+        
         // التحقق من حالة تسجيل الدخول عند تحميل الصفحة
         window.addEventListener('load', function() {
-            if (localStorage.getItem('userLoggedIn') === 'true') {
-                showRequestForm();
-                document.getElementById('balanceAmount').textContent = localStorage.getItem('userBalance') || '0';
+            initDatabase();
+            
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            if (currentUser.id) {
+                if (currentUser.isAdmin) {
+                    showAdminPanel();
+                } else {
+                    showRequestForm();
+                    document.getElementById('balanceAmount').textContent = currentUser.balance || 0;
+                }
             }
         });
     </script>
 </body>
-</html>
+                        </html>
