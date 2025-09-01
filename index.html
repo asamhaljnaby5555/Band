@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استرجاع حساب انستقرام - ASTRH.COM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --purple: #6a0dad;
+            --dark-red: #8B0000;
+            --black: #000000;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-purple: #4b0082;
+            --gold: #FFD700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-purple) 100%);
+            color: var(--white);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* شريط التنقل */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--purple);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            margin-right: 10px;
+            background: linear-gradient(to right, var(--purple), var(--dark-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--purple);
+            color: var(--white);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--purple);
+        }
+        
+        .btn-primary:hover {
+            background: var(--dark-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(106, 13, 173, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .btn i {
+            margin-left: 8px;
+        }
+        
+        /* القائمة العلوية */
+        .user-menu {
+            position: relative;
+            display: none;
+        }
+        
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--white);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--purple);
+            border-radius: 10px;
+            padding: 10px;
+            width: 200px;
+            z-index: 100;
+            display: none;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            color: var(--white);
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu a:hover {
+            background: var(--purple);
+        }
+        
+        .user-balance {
+            background: linear-gradient(to right, var(--purple), var(--dark-red));
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 15px;
+            display: none;
+        }
+        
+        /* قسم الهيرو */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #ddd;
+            line-height: 1.6;
+        }
+        
+        /* نموذج الطلب */
+        .form-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid var(--purple);
+            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
+            display: none;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--white);
+            font-size: 26px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .form-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--purple), var(--dark-red));
+            border-radius: 3px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: rgba(50, 50, 50, 0.8);
+            color: var(--white);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--purple);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.3);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-group input {
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .checkbox-group label {
+            color: #ddd;
+            font-size: 15px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--purple), var(--dark-red));
+            color: var(--white);
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn .spinner {
+            display: none;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* نماذج أخرى */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(to bottom, var(--dark-purple), var(--black));
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--purple);
+            box-shadow: 0 0 30px rgba(106, 13, 173, 0.5);
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        
+        .close-btn {
+            background: var(--dark-red);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .close-btn:hover {
+            background: #6d0000;
+            transform: translateY(-3px);
+        }
+        
+        /* صفحة تسجيل الدخول */
+        .login-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 0 auto;
+            border: 1px solid var(--purple);
+            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
+            max-width: 500px;
+            display: none;
+        }
+        
+        .captcha-box {
+            background: rgba(50, 50, 50, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: var(--gold);
+            user-select: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            color: #999;
+        }
+        
+        .copyright {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .auth-buttons {
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .form-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <h1>ASTRH.COM</h1>
+            </div>
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="btn btn-primary" onclick="showRegister()">
+                    <i class="fas fa-user-plus"></i> إنشاء حساب
+                </button>
+                <button class="btn btn-secondary" onclick="showLogin()">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل دخول
+                </button>
+            </div>
+            
+            <div class="user-menu" id="userMenu">
+                <div class="user-balance" id="userBalance">
+                    رصيدك: <span id="balanceAmount">0</span> $
+                </div>
+                <div class="menu-icon" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#" onclick="showChargeModal()"><i class="fas fa-coins"></i> شحن الرصيد</a>
+                    <a href="#" onclick="showRequests()"><i class="fas fa-list"></i> الطلبات</a>
+                    <a href="#" onclick="showSupport()"><i class="fas fa-headset"></i> الدعم الفني</a>
+                    <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                </div>
+            </div>
+        </nav>
+        
+        <section class="hero">
+            <h2>استرجاع حساب انستقرام المحظور خلال 24 ساعة</h2>
+            <p>نقدم خدمة استرجاع حسابات انستقرام المحظورة باحترافية عالية ونسبة نجاح تتجاوز 95%. فريقنا يعمل على مدار الساعة لمساعدتك في استعادة حسابك.</p>
+        </section>
+        
+        <div class="form-container" id="requestForm">
+            <h2 class="form-title">طلب استرجاع الحساب</h2>
+            <form id="recovery-form">
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> اسم المستخدم في انستقرام</label>
+                    <input type="text" id="username" name="username" required placeholder="أدخل اسم المستخدم الخاص بك">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" required placeholder="أدخل البريد الإلكتروني المرتبط بالحساب">
+                </div>
+                
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-id-card"></i> الاسم بالحساب</label>
+                    <input type="text" id="name" name="name" required placeholder="أدخل الاسم الظاهر في الحساب">
+                </div>
+                
+                <div class="form-group">
+                    <label for="device"><i class="fas fa-mobile-alt"></i> آخر جهاز تم التسجيل منه</label>
+                    <input type="text" id="device" name="device" required placeholder="نوع الجهاز/نظام التشغيل">
+                </div>
+                
+                <div class="form-group">
+                    <label for="banType"><i class="fas fa-ban"></i> نوع الحظر</label>
+                    <select id="banType" name="banType" required>
+                        <option value="">اختر نوع الحظر</option>
+                        <option value="temporary">حظر مؤقت</option>
+                        <option value="permanent">حظر دائم</option>
+                        <option value="disabled">تعطيل الحساب</option>
+                        <option value="unknown">غير معروف</option>
+                    </select>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="noAppeal" name="noAppeal" required>
+                    <label for="noAppeal">أؤكد أنني لم أقدم طعنًا على الحظر من قبل</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="removeBan" name="removeBan" required>
+                    <label for="removeBan">أوافق على إزالة الحظر والالتزام بشروط الانستقرام</label>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span id="btnText">إرسال الطلب (15$)</span>
+                    <i class="fas fa-spinner spinner" id="spinner"></i>
+                </button>
+            </form>
+        </div>
+        
+        <div class="login-container" id="loginForm">
+            <h2 class="form-title">تسجيل الدخول</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="loginUsername"><i class="fas fa-user"></i> اسم المستخدم</label>
+                    <input type="text" id="loginUsername" name="loginUsername" required placeholder="أدخل اسم المستخدم">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> كلمة المرور</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required placeholder="أدخل كلمة المرور">
+                </div>
+                
+                <div class="form-group">
+                    <label for="captcha">أدخل الرمز الظاهر أدناه</label>
+                    <div class="captcha-box" id="captchaCode">5T0K3N</div>
+                    <input type="text" id="captcha" name="captcha" required placeholder="أدخل الرمز">
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span>تسجيل الدخول</span>
+                </button>
+            </form>
+            
+            <p style="margin-top: 20px; color: #ccc;">
+                ليس لديك حساب؟ <a href="#" onclick="showRegister()" style="color: var(--purple);">إنشاء حساب جديد</a>
+            </p>
+        </div>
+        
+        <div class="login-container" id="registerForm">
+            <h2 class="form-title">إنشاء حساب جديد</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="regUsername"><i class="fas fa-user"></i> اسم المستخدم</label>
+                    <input type="text" id="regUsername" name="regUsername" required placeholder="اختر اسم مستخدم">
+                </div>
+                
+                <div class="form-group">
+                    <label for="regEmail"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                    <input type="email" id="regEmail" name="regEmail" required placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                
+                <div class="form-group">
+                    <label for="regPassword"><i class="fas fa-lock"></i> كلمة المرور</label>
+                    <input type="password" id="regPassword" name="regPassword" required placeholder="اختر كلمة مرور قوية">
+                </div>
+                
+                <div class="form-group">
+                    <label for="regConfirmPassword"><i class="fas fa-lock"></i> تأكيد كلمة المرور</label>
+                    <input type="password" id="regConfirmPassword" name="regConfirmPassword" required placeholder="أعد إدخال كلمة المرور">
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span>إنشاء حساب</span>
+                </button>
+            </form>
+            
+            <p style="margin-top: 20px; color: #ccc;">
+                لديك حساب already؟ <a href="#" onclick="showLogin()" style="color: var(--purple);">تسجيل الدخول</a>
+            </p>
+        </div>
+        
+        <footer>
+            <p>جميع الحقوق محفوظة © 2023 - <span>ASTRH.COM</span></p>
+            <p class="copyright">تصميم وتطوير: أسامة ليث</p>
+        </footer>
+    </div>
+    
+    <!-- نافذة شحن الرصيد -->
+    <div class="modal" id="chargeModal">
+        <div class="modal-content">
+            <h2 class="modal-title">شحن الرصيد</h2>
+            <div class="form-group">
+                <label for="chargeCode">أدخل كود الشحن</label>
+                <input type="text" id="chargeCode" placeholder="أدخل الكود المكون من 16 رقم">
+            </div>
+            
+            <button class="close-btn" onclick="chargeAccount()">شحن الرصيد</button>
+            <p style="margin-top: 20px; color: #ccc;">
+                لطلب كود شحن، يرجى التواصل مع الدعم الفني
+            </p>
+            <button class="btn btn-secondary" style="margin-top: 10px;" onclick="showSupport()">
+                التواصل مع الدعم
+            </button>
+            <button class="close-btn" style="background: #333; margin-top: 10px;" onclick="closeModal('chargeModal')">إلغاء</button>
+        </div>
+    </div>
+    
+    <!-- نافذة الدعم الفني -->
+    <div class="modal" id="supportModal">
+        <div class="modal-content">
+            <h2 class="modal-title">التواصل مع الدعم الفني</h2>
+            <div class="form-group">
+                <label for="supportSubject">الموضوع</label>
+                <input type="text" id="supportSubject" placeholder="موضوع المشكلة">
+            </div>
+            
+            <div class="form-group">
+                <label for="supportMessage">الرسالة</label>
+                <textarea id="supportMessage" rows="5" placeholder="صف مشكلتك بالتفصيل"></textarea>
+            </div>
+            
+            <button class="close-btn" onclick="sendSupportRequest()">إرسال</button>
+            <button class="close-btn" style="background: #333; margin-top: 10px;" onclick="closeModal('supportModal')">إلغاء</button>
+        </div>
+    </div>
+    
+    <!-- نافذة الطلبات -->
+    <div class="modal" id="requestsModal">
+        <div class="modal-content">
+            <h2 class="modal-title">طلباتك السابقة</h2>
+            <div id="requestsList">
+                <p style="color: #ccc; text-align: center; padding: 20px;">لا توجد طلبات سابقة</p>
+            </div>
+            <button class="close-btn" style="background: #333; margin-top: 10px;" onclick="closeModal('requestsModal')">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        // توليد كابتشا عشوائي
+        function generateCaptcha() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let captcha = "";
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('captchaCode').textContent = captcha;
+            return captcha;
+        }
+        
+        let currentCaptcha = generateCaptcha();
+        
+        // إظهار وإخفاء النماذج
+        function showLogin() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('requestForm').style.display = 'none';
+            currentCaptcha = generateCaptcha();
+        }
+        
+        function showRegister() {
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('requestForm').style.display = 'none';
+        }
+        
+        function showRequestForm() {
+            document.getElementById('requestForm').style.display = 'block';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('userMenu').style.display = 'flex';
+        }
+        
+        // القائمة المنسدلة
+        function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        // إغلاق القائمة عند النقر خارجها
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.menu-icon') && !e.target.matches('.menu-icon *')) {
+                document.getElementById('dropdownMenu').style.display = 'none';
+            }
+        });
+        
+        // إظهار النوافذ المنبثقة
+        function showChargeModal() {
+            document.getElementById('chargeModal').style.display = 'flex';
+            document.getElementById('dropdownMenu').style.display = 'none';
+        }
+        
+        function showSupport() {
+            document.getElementById('supportModal').style.display = 'flex';
+            document.getElementById('dropdownMenu').style.display = 'none';
+        }
+        
+        function showRequests() {
+            document.getElementById('requestsModal').style.display = 'flex';
+            document.getElementById('dropdownMenu').style.display = 'none';
+            loadRequests();
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // تسجيل الدخول
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const captcha = document.getElementById('captcha').value;
+            
+            if (captcha !== currentCaptcha) {
+                alert('الرمز غير صحيح، يرجى المحاولة مرة أخرى');
+                currentCaptcha = generateCaptcha();
+                return;
+            }
+            
+            // محاكاة عملية تسجيل الدخول
+            if (username && password) {
+                // حفظ حالة المستخدم
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                localStorage.setItem('userBalance', '100'); // رصيد افتراضي
+                
+                showRequestForm();
+                document.getElementById('balanceAmount').textContent = localStorage.getItem('userBalance');
+            }
+        });
+        
+        // تسجيل حساب جديد
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('كلمة المرور غير متطابقة');
+                return;
+            }
+            
+            // محاكاة عملية التسجيل
+            if (username && email && password) {
+                alert('تم إنشاء حسابك بنجاح! يرجى تسجيل الدخول الآن.');
+                showLogin();
+            }
+        });
+        
+        // إرسال طلب الاسترجاع
+        document.getElementById('recovery-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const balance = parseInt(localStorage.getItem('userBalance') || '0');
+            
+            if (balance < 15) {
+                alert('رصيدك غير كافٍ لإنشاء طلب جديد. يرجى شحن الرصيد.');
+                showChargeModal();
+                return;
+            }
+            
+            // خصم 15 دولار
+            const newBalance = balance - 15;
+            localStorage.setItem('userBalance', newBalance.toString());
+            document.getElementById('balanceAmount').textContent = newBalance;
+            
+            // جمع بيانات النموذج
+            const formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                name: document.getElementById('name').value,
+                device: document.getElementById('device').value,
+                banType: document.getElementById('banType').value
+            };
+            
+            // حفظ الطلب
+            const requests = JSON.parse(localStorage.getItem('userRequests') || '[]');
+            requests.push({
+                ...formData,
+                date: new Date().toLocaleDateString(),
+                status: 'قيد التنفيذ'
+            });
+            localStorage.setItem('userRequests', JSON.stringify(requests));
+            
+            // إظهار رسالة النجاح
+            alert('تم إرسال طلبك بنجاح وخصم 15$ من رصيدك. سيتم مراجعة طلبك خلال 24 ساعة.');
+            
+            // مسح النموذج
+            document.getElementById('recovery-form').reset();
+        });
+        
+        // شحن الرصيد
+        function chargeAccount() {
+            const chargeCode = document.getElementById('chargeCode').value;
+            
+            if (!chargeCode || chargeCode.length !== 16) {
+                alert('كود الشحن يجب أن يكون مكون من 16 حرف/رقم');
+                return;
+            }
+            
+            // محاكاة عملية الشحن
+            const currentBalance = parseInt(localStorage.getItem('userBalance') || '0');
+            const newBalance = currentBalance + 50; // إضافة 50 دولار لكل كود
+            localStorage.setItem('userBalance', newBalance.toString());
+            document.getElementById('balanceAmount').textContent = newBalance;
+            
+            alert('تم شحن 50$ إلى رصيدك بنجاح!');
+            closeModal('chargeModal');
+            document.getElementById('chargeCode').value = '';
+        }
+        
+        // إرسال طلب الدعم
+        function sendSupportRequest() {
+            const subject = document.getElementById('supportSubject').value;
+            const message = document.getElementById('supportMessage').value;
+            
+            if (!subject || !message) {
+                alert('يرجى ملء جميع الحقول');
+                return;
+            }
+            
+            // محاكاة إرسال طلب الدعم
+            alert('تم إرسال رسالتك إلى الدعم الفني. سيتم الرد عليك خلال 24 ساعة.');
+            closeModal('supportModal');
+            document.getElementById('supportSubject').value = '';
+            document.getElementById('supportMessage').value = '';
+        }
+        
+        // تحميل الطلبات السابقة
+        function loadRequests() {
+            const requests = JSON.parse(localStorage.getItem('userRequests') || '[]');
+            const requestsList = document.getElementById('requestsList');
+            
+            if (requests.length === 0) {
+                requestsList.innerHTML = '<p style="color: #ccc; text-align: center; padding: 20px;">لا توجد طلبات سابقة</p>';
+                return;
+            }
+            
+            requestsList.innerHTML = '';
+            requests.forEach((request, index) => {
+                const requestItem = document.createElement('div');
+                requestItem.style.background = 'rgba(50, 50, 50, 0.5)';
+                requestItem.style.padding = '15px';
+                requestItem.style.borderRadius = '8px';
+                requestItem.style.marginBottom = '10px';
+                requestItem.style.borderLeft = `4px solid ${request.status === 'قيد التنفيذ' ? '#6a0dad' : '#8B0000'}`;
+                
+                requestItem.innerHTML = `
+                    <h3 style="margin-bottom: 10px;">طلب #${index + 1}</h3>
+                    <p><strong>اليوزر:</strong> ${request.username}</p>
+                    <p><strong>الحالة:</strong> ${request.status}</p>
+                    <p><strong>التاريخ:</strong> ${request.date}</p>
+                `;
+                
+                requestsList.appendChild(requestItem);
+            });
+        }
+        
+        // تسجيل الخروج
+        function logout() {
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('userBalance');
+            document.getElementById('userMenu').style.display = 'none';
+            document.getElementById('authButtons').style.display = 'flex';
+            document.getElementById('requestForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('dropdownMenu').style.display = 'none';
+        }
+        
+        // التحقق من حالة تسجيل الدخول عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('userLoggedIn') === 'true') {
+                showRequestForm();
+                document.getElementById('balanceAmount').textContent = localStorage.getItem('userBalance') || '0';
+            }
+        });
+    </script>
+</body>
+</html>
