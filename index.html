@@ -29,6 +29,7 @@
             color: var(--light);
             background-image: linear-gradient(to bottom, #0a0a1a, #1a0033);
             min-height: 100vh;
+            padding-bottom: 20px;
         }
         
         .container {
@@ -376,7 +377,12 @@
             
             nav ul {
                 margin-top: 20px;
+                flex-wrap: wrap;
                 justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
             }
             
             .social-links {
@@ -431,6 +437,21 @@
         
         .notification.error {
             background: var(--secondary);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -527,7 +548,7 @@
                         </div>
                         <div class="order-stat">
                             <span>تاريخ الانتهاء:</span>
-                            <span class="stat-value">15/08/2023</span>
+                            <span class="stat-value">15/09/2025</span>
                         </div>
                         <div class="order-stat">
                             <span>الحالة:</span>
@@ -547,7 +568,7 @@
                         </div>
                         <div class="order-stat">
                             <span>تاريخ الانتهاء:</span>
-                            <span class="stat-value">10/08/2023</span>
+                            <span class="stat-value">10/08/2025</span>
                         </div>
                         <div class="order-stat">
                             <span>الحالة:</span>
@@ -567,7 +588,7 @@
                         </div>
                         <div class="order-stat">
                             <span>تاريخ الانتهاء:</span>
-                            <span class="stat-value">05/08/2023</span>
+                            <span class="stat-value">05/10/2025</span>
                         </div>
                         <div class="order-stat">
                             <span>الحالة:</span>
@@ -591,23 +612,23 @@
                 
                 <div class="form-group">
                     <label for="proxy-status">معلومات البروكسي (للإدارة فقط):</label>
-                    <input type="text" id="proxy-status" value="نظام بروكسي آمن ومخفي - يعمل تلقائياً" disabled>
+                    <input type="text" id="proxy-status-input" value="نظام بروكسي آمن ومخفي - يعمل تلقائياً" disabled>
                 </div>
                 
                 <div class="form-grid">
                     <div class="form-group">
                         <label>عدد البروكسيات النشطة:</label>
-                        <input type="text" value="47 بروكسي" disabled>
+                        <input type="text" value="68 بروكسي" disabled>
                     </div>
                     
                     <div class="form-group">
                         <label>الطلب الحالي قيد المعالجة:</label>
-                        <input type="text" value="قناة @example - 5000 مشاهدة" disabled>
+                        <input type="text" value="قناة @example - 7500 مشاهدة" disabled>
                     </div>
                     
                     <div class="form-group">
                         <label>المشاهدات المضافة اليوم:</label>
-                        <input type="text" value="12475 مشاهدة" disabled>
+                        <input type="text" value="18,425 مشاهدة" disabled>
                     </div>
                     
                     <div class="form-group">
@@ -623,7 +644,7 @@
     <footer>
         <div class="container footer-content">
             <div class="copyright">
-                جميع الحقوق محفوظة &copy; 2023 - <span>أسامة ليث</span>
+                جميع الحقوق محفوظة &copy; 2025 - <span>أسامة ليث</span>
             </div>
             
             <div class="footer-links">
@@ -651,117 +672,161 @@
             }, 3000);
         }
         
-        // التنقل بين الأقسام
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // إزالة النشط من جميع الروابط
-                document.querySelectorAll('nav a').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // إضافة النشط للرابط الحالي
-                this.classList.add('active');
-                
-                // إخفاء جميع الأقسام
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // إظهار القسم المطلوب
-                const section = this.getAttribute('data-section');
-                if (section === 'home') {
-                    document.getElementById('order-tab').classList.add('active');
-                    document.querySelector('.tab[data-tab="order"]').classList.add('active');
-                } else if (section === 'orders') {
-                    document.getElementById('stats-tab').classList.add('active');
-                    document.querySelector('.tab[data-tab="stats"]').classList.add('active');
-                } else if (section === 'proxy') {
-                    document.getElementById('proxy-info-tab').classList.add('active');
-                    document.querySelector('.tab[data-tab="proxy-info"]').classList.add('active');
+        // تهيئة التاريخ الحالي
+        function setCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const today = `${year}-${month}-${day}`;
+            
+            // تعيين الحد الأدنى لتاريخ الإيقاف إلى اليوم
+            document.getElementById('stop-date').setAttribute('min', today);
+            
+            // تحديث التواريخ في الطلبات إلى 2025
+            document.querySelectorAll('.order-stat .stat-value').forEach(el => {
+                if (el.textContent.includes('2023')) {
+                    el.textContent = el.textContent.replace('2023', '2025');
                 }
             });
-        });
+        }
+        
+        // التنقل بين الأقسام
+        function setupNavigation() {
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // إزالة النشط من جميع الروابط
+                    document.querySelectorAll('nav a').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // إضافة النشط للرابط الحالي
+                    this.classList.add('active');
+                    
+                    // إخفاء جميع محتويات التبويبات
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // إخفاء جميع التبويبات
+                    document.querySelectorAll('.tab').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    // إظهار القسم المطلوب
+                    const section = this.getAttribute('data-section');
+                    if (section === 'home') {
+                        document.getElementById('order-tab').classList.add('active');
+                        document.querySelector('.tab[data-tab="order"]').classList.add('active');
+                    } else if (section === 'orders') {
+                        document.getElementById('stats-tab').classList.add('active');
+                        document.querySelector('.tab[data-tab="stats"]').classList.add('active');
+                    } else if (section === 'proxy') {
+                        document.getElementById('proxy-info-tab').classList.add('active');
+                        document.querySelector('.tab[data-tab="proxy-info"]').classList.add('active');
+                    }
+                });
+            });
+        }
         
         // نظام التبويبات
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // إزالة النشط من جميع التبويبات
-                document.querySelectorAll('.tab').forEach(t => {
-                    t.classList.remove('active');
+        function setupTabs() {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // إزالة النشط من جميع التبويبات
+                    document.querySelectorAll('.tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    
+                    // إضافة النشط للتبويب الحالي
+                    this.classList.add('active');
+                    
+                    // إخفاء جميع محتويات التبويبات
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // إظهار المحتوى المرتبط بالتبويب
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
                 });
-                
-                // إضافة النشط للتبويب الحالي
-                this.classList.add('active');
-                
-                // إخفاء جميع محتويات التبويبات
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // إظهار المحتوى المرتبط بالتبويب
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById(`${tabId}-tab`).classList.add('active');
             });
-        });
+        }
         
         // معالجة إرسال النموذج
-        document.getElementById('submit-btn').addEventListener('click', function() {
-            const channel = document.getElementById('channel').value;
-            const views = document.getElementById('views').value;
-            const stopDate = document.getElementById('stop-date').value;
-            const duration = document.getElementById('duration').value;
-            
-            if (!channel || !views || !stopDate || !duration) {
-                showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
-                return;
-            }
-            
-            if (!channel.startsWith('@')) {
-                showNotification('يجب أن يبدأ اسم القناة بـ @', 'error');
-                return;
-            }
-            
-            // محاكاة إرسال الطلب
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
-            this.disabled = true;
-            
-            setTimeout(() => {
-                showNotification('تم استلام طلبك بنجاح! سيبدأ نظامنا بمعالجة طلبك قريباً.', 'success');
-                this.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الطلب';
-                this.disabled = false;
+        function setupForm() {
+            document.getElementById('submit-btn').addEventListener('click', function() {
+                const channel = document.getElementById('channel').value;
+                const views = document.getElementById('views').value;
+                const stopDate = document.getElementById('stop-date').value;
+                const duration = document.getElementById('duration').value;
                 
-                // مسح الحقول
-                document.getElementById('channel').value = '';
-                document.getElementById('views').value = '';
-                document.getElementById('stop-date').value = '';
-                document.getElementById('duration').value = '';
-            }, 2000);
-        });
+                if (!channel || !views || !stopDate || !duration) {
+                    showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
+                    return;
+                }
+                
+                if (!channel.startsWith('@')) {
+                    showNotification('يجب أن يبدأ اسم القناة بـ @', 'error');
+                    return;
+                }
+                
+                if (views < 100) {
+                    showNotification('الحد الأدنى لعدد المشاهدات هو 100', 'error');
+                    return;
+                }
+                
+                if (duration < 10) {
+                    showNotification('الحد الأدنى لمدة الإكمال هو 10 دقائق', 'error');
+                    return;
+                }
+                
+                // محاكاة إرسال الطلب
+                const originalText = this.innerHTML;
+                this.innerHTML = '<span class="spinner"></span> جاري المعالجة...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    showNotification('تم استلام طلبك بنجاح! سيبدأ نظامنا بمعالجة طلبك قريباً.', 'success');
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                    
+                    // مسح الحقول
+                    document.getElementById('channel').value = '';
+                    document.getElementById('views').value = '';
+                    document.getElementById('stop-date').value = '';
+                    document.getElementById('duration').value = '';
+                }, 2000);
+            });
+        }
         
         // محاكاة تحديث حالة البروكسي
-        setInterval(() => {
-            const statusText = document.querySelector('.proxy-status .status-active');
-            if (statusText) {
-                const texts = [
-                    "الحالة: نشط ومخفي - يعمل على زيادة المشاهدات",
-                    "الحالة: نشط - جاري معالجة 5 طلبات",
-                    "الحالة: نشط - جديد: 1245 مشاهدة تمت إضافتها",
-                    "الحالة: نشط - يعمل بشكل مثالي"
-                ];
-                const randomText = texts[Math.floor(Math.random() * texts.length)];
-                statusText.textContent = randomText;
-            }
-        }, 5000);
+        function setupProxyStatus() {
+            setInterval(() => {
+                const statusText = document.querySelector('.proxy-status .status-active');
+                if (statusText) {
+                    const texts = [
+                        "الحالة: نشط ومخفي - يعمل على زيادة المشاهدات",
+                        "الحالة: نشط - جاري معالجة 7 طلبات",
+                        "الحالة: نشط - جديد: 2450 مشاهدة تمت إضافتها",
+                        "الحالة: نشط - يعمل بشكل مثالي"
+                    ];
+                    const randomText = texts[Math.floor(Math.random() * texts.length)];
+                    statusText.textContent = randomText;
+                }
+            }, 5000);
+        }
         
-        // تعيين الحد الأدنى لتاريخ الإيقاف إلى اليوم
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        const todayStr = `${yyyy}-${mm}-${dd}`;
-        document.getElementById('stop-date').setAttribute('min', todayStr);
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            setCurrentDate();
+            setupNavigation();
+            setupTabs();
+            setupForm();
+            setupProxyStatus();
+        });
     </script>
 </body>
-    </html>
+                    </html>
