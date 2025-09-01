@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استرجاع حساب انستقرام - ASTRH.COM</title>
+    <title>نظام زيادة مشاهدات تليجرام - الإدارة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --purple: #6a0dad;
-            --dark-red: #8B0000;
-            --black: #000000;
-            --white: #ffffff;
-            --light-gray: #f5f5f5;
-            --dark-purple: #4b0082;
-            --gold: #FFD700;
-            --sidebar-width: 250px;
+            --primary: #8A2BE2;
+            --secondary: #FF0000;
+            --dark: #000000;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+            --warning: #ffc107;
+            --info: #17a2b8;
         }
         
         * {
@@ -25,25 +25,34 @@
         }
         
         body {
-            background: linear-gradient(135deg, var(--black) 0%, var(--dark-purple) 100%);
-            color: var(--white);
+            background-color: #0a0a1a;
+            color: var(--light);
+            background-image: linear-gradient(to bottom, #0a0a1a, #1a0033);
             min-height: 100vh;
-            padding: 20px;
         }
         
         .container {
-            max-width: 1200px;
+            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
         }
         
-        /* شريط التنقل */
-        nav {
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--purple);
         }
         
         .logo {
@@ -52,155 +61,248 @@
         }
         
         .logo h1 {
-            font-size: 28px;
-            margin-right: 10px;
-            background: linear-gradient(to right, var(--purple), var(--dark-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background: var(--purple);
-            color: var(--white);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--purple);
-        }
-        
-        .btn-primary:hover {
-            background: var(--dark-purple);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(106, 13, 173, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        .btn i {
-            margin-left: 8px;
-        }
-        
-        /* القائمة العلوية */
-        .user-menu {
-            position: relative;
-            display: none;
-            align-items: center;
-        }
-        
-        .menu-icon {
+            color: var(--primary);
             font-size: 24px;
-            cursor: pointer;
-            color: var(--white);
+            margin-left: 10px;
         }
         
-        .dropdown-menu {
-            position: absolute;
-            top: 40px;
-            left: 0;
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--purple);
-            border-radius: 10px;
-            padding: 10px;
-            width: 200px;
-            z-index: 100;
-            display: none;
+        .logo span {
+            color: var(--secondary);
         }
         
-        .dropdown-menu a {
-            display: block;
-            color: var(--white);
-            padding: 10px;
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: var(--light);
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 10px 15px;
             border-radius: 5px;
-            margin-bottom: 5px;
-            transition: all 0.3s ease;
         }
         
-        .dropdown-menu a:hover {
-            background: var(--purple);
+        nav ul li a:hover, 
+        nav ul li a.active {
+            color: var(--primary);
+            background-color: rgba(138, 43, 226, 0.1);
         }
         
-        .user-balance {
-            background: linear-gradient(to right, var(--purple), var(--dark-red));
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-weight: bold;
+        .social-links a {
+            color: var(--light);
+            font-size: 20px;
             margin-left: 15px;
+            transition: color 0.3s;
         }
         
-        /* قسم الهيرو */
-        .hero {
-            text-align: center;
-            margin-bottom: 40px;
+        .social-links a:hover {
+            color: var(--primary);
         }
         
-        .hero h2 {
-            font-size: 36px;
-            margin-bottom: 15px;
-            color: var(--white);
+        /* Dashboard Layout */
+        .dashboard {
+            display: flex;
+            margin-top: 30px;
+            gap: 20px;
         }
         
-        .hero p {
-            font-size: 18px;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #ddd;
-            line-height: 1.6;
-        }
-        
-        /* نماذج الموقع */
-        .form-container {
-            background: rgba(0, 0, 0, 0.7);
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border: 1px solid var(--purple);
-            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
-            display: none;
+            padding: 20px;
+            border: 1px solid var(--primary);
+            height: fit-content;
         }
         
-        .form-title {
+        .sidebar-title {
+            color: var(--primary);
+            margin-bottom: 20px;
             text-align: center;
+            font-size: 20px;
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 10px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            color: var(--light);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover, 
+        .sidebar-menu a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .sidebar-menu i {
+            margin-left: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--primary);
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 25px;
-            color: var(--white);
-            font-size: 26px;
-            position: relative;
+            border-bottom: 1px solid var(--primary);
             padding-bottom: 15px;
         }
         
-        .form-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(to right, var(--purple), var(--dark-red));
-            border-radius: 3px;
+        .content-title {
+            color: var(--primary);
+            font-size: 24px;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--primary);
+            text-align: center;
+        }
+        
+        .stat-card i {
+            font-size: 30px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .stat-card h3 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+        
+        .stat-card p {
+            color: var(--gray);
+        }
+        
+        /* Tables */
+        .table-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--primary);
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .table-title {
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table th, 
+        table td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        
+        table th {
+            background-color: rgba(138, 43, 226, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        table tr:hover {
+            background-color: rgba(138, 43, 226, 0.05);
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-inactive {
+            background-color: rgba(108, 117, 125, 0.2);
+            color: var(--gray);
+        }
+        
+        /* Forms */
+        .form-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--primary);
+            margin-bottom: 25px;
+        }
+        
+        .form-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 10px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
         
         .form-group {
@@ -210,1154 +312,530 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--white);
+            color: var(--light);
+            font-weight: 500;
         }
         
-        .form-group input, .form-group select, .form-group textarea {
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #333;
-            border-radius: 8px;
-            background: rgba(50, 50, 50, 0.8);
-            color: var(--white);
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--purple);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.3);
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .checkbox-group input {
-            margin-left: 10px;
-            width: 18px;
-            height: 18px;
-        }
-        
-        .checkbox-group label {
-            color: #ddd;
-            font-size: 15px;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(to right, var(--purple), var(--dark-red));
-            color: var(--white);
-            border: none;
-            padding: 16px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            display: block;
-            margin: 30px auto 10px;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 300px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3);
-        }
-        
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
-        .submit-btn .spinner {
-            display: none;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* صفحة تسجيل الدخول */
-        .login-container {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 0 auto;
-            border: 1px solid var(--purple);
-            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
-            max-width: 500px;
-            display: none;
-        }
-        
-        .captcha-box {
-            background: rgba(50, 50, 50, 0.8);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 20px 0;
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 5px;
-            color: var(--gold);
-            user-select: none;
-        }
-        
-        /* النوافذ المنبثقة */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background: linear-gradient(to bottom, var(--dark-purple), var(--black));
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid var(--purple);
-            box-shadow: 0 0 30px rgba(106, 13, 173, 0.5);
-        }
-        
-        .modal-title {
-            font-size: 24px;
-            color: var(--white);
-            margin-bottom: 20px;
-        }
-        
-        .close-btn {
-            background: var(--dark-red);
-            color: var(--white);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-        
-        .close-btn:hover {
-            background: #6d0000;
-            transform: translateY(-3px);
-        }
-        
-        /* لوحة الأدمن */
-        .admin-panel {
-            display: none;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border: 1px solid var(--purple);
-            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
-        }
-        
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--purple);
-        }
-        
-        .admin-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .admin-tab {
-            padding: 10px 20px;
-            background: rgba(106, 13, 173, 0.3);
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .admin-tab.active {
-            background: var(--purple);
-        }
-        
-        .admin-tab:hover {
-            background: var(--purple);
-        }
-        
-        .admin-content {
-            display: none;
-        }
-        
-        .admin-content.active {
-            display: block;
-        }
-        
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: rgba(50, 50, 50, 0.5);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .data-table th, .data-table td {
             padding: 12px 15px;
-            text-align: right;
-            border-bottom: 1px solid #333;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--light);
+            font-size: 16px;
         }
         
-        .data-table th {
-            background: var(--purple);
-            color: var(--white);
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
         }
         
-        .data-table tr:hover {
-            background: rgba(106, 13, 173, 0.1);
-        }
-        
-        .status-badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .status-pending {
-            background: #ff9800;
-            color: #000;
-        }
-        
-        .status-completed {
-            background: #4caf50;
-            color: #fff;
-        }
-        
-        .status-cancelled {
-            background: #f44336;
-            color: #fff;
-        }
-        
-        footer {
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
             text-align: center;
-            padding: 20px 0;
-            border-top: 1px solid #333;
-            margin-top: 40px;
-            color: #999;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 2px solid var(--primary);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .copyright {
-            font-size: 16px;
-            margin-top: 10px;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+        
+        .copyright span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .developer {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            color: var(--light);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .dashboard {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
         }
         
         @media (max-width: 768px) {
-            nav {
+            .header-content {
                 flex-direction: column;
-                text-align: center;
             }
             
-            .logo {
-                justify-content: center;
-                margin-bottom: 15px;
-            }
-            
-            .auth-buttons {
+            nav ul {
+                margin-top: 20px;
                 justify-content: center;
             }
             
-            .hero h2 {
-                font-size: 28px;
+            .social-links {
+                margin-top: 20px;
             }
             
-            .hero p {
-                font-size: 16px;
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
             
-            .form-title {
-                font-size: 22px;
-            }
-            
-            .data-table {
-                font-size: 14px;
-            }
-            
-            .data-table th, .data-table td {
-                padding: 8px 10px;
+            .form-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
             <div class="logo">
-                <h1>ASTRH.COM</h1>
+                <h1>Telegram<span>Views</span></h1>
             </div>
             
-            <div class="auth-buttons" id="authButtons">
-                <button class="btn btn-primary" onclick="showRegister()">
-                    <i class="fas fa-user-plus"></i> إنشاء حساب
-                </button>
-                <button class="btn btn-secondary" onclick="showLogin()">
-                    <i class="fas fa-sign-in-alt"></i> تسجيل دخول
-                </button>
-            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#"><i class="fas fa-eye"></i> المشاهدات</a></li>
+                    <li><a href="#"><i class="fas fa-server"></i> البروكسيات</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                </ul>
+            </nav>
             
-            <div class="user-menu" id="userMenu">
-                <div class="user-balance" id="userBalance">
-                    رصيدك: <span id="balanceAmount">0</span> $
-                </div>
-                <div class="menu-icon" onclick="toggleMenu()">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#" onclick="showChargeModal()"><i class="fas fa-coins"></i> شحن الرصيد</a>
-                    <a href="#" onclick="showRequests()"><i class="fas fa-list"></i> الطلبات</a>
-                    <a href="#" onclick="showSupport()"><i class="fas fa-headset"></i> الدعم الفني</a>
-                    <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-                </div>
-            </div>
-        </nav>
-        
-        <section class="hero">
-            <h2>استرجاع حساب انستقرام المحظور خلال 24 ساعة</h2>
-            <p>نقدم خدمة استرجاع حسابات انستقرام المحظورة باحترافية عالية ونسبة نجاح تتجاوز 95%. فريقنا يعمل على مدار الساعة لمساعدتك في استعادة حسابك.</p>
-        </section>
-        
-        <!-- نموذج طلب الاسترجاع -->
-        <div class="form-container" id="requestForm">
-            <h2 class="form-title">طلب استرجاع الحساب</h2>
-            <form id="recovery-form">
-                <div class="form-group">
-                    <label for="username"><i class="fas fa-user"></i> اسم المستخدم في انستقرام</label>
-                    <input type="text" id="username" name="username" required placeholder="أدخل اسم المستخدم الخاص بك">
-                </div>
-                
-                <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
-                    <input type="email" id="email" name="email" required placeholder="أدخل البريد الإلكتروني المرتبط بالحساب">
-                </div>
-                
-                <div class="form-group">
-                    <label for="name"><i class="fas fa-id-card"></i> الاسم بالحساب</label>
-                    <input type="text" id="name" name="name" required placeholder="أدخل الاسم الظاهر في الحساب">
-                </div>
-                
-                <div class="form-group">
-                    <label for="device"><i class="fas fa-mobile-alt"></i> آخر جهاز تم التسجيل منه</label>
-                    <input type="text" id="device" name="device" required placeholder="نوع الجهاز/نظام التشغيل">
-                </div>
-                
-                <div class="form-group">
-                    <label for="banType"><i class="fas fa-ban"></i> نوع الحظر</label>
-                    <select id="banType" name="banType" required>
-                        <option value="">اختر نوع الحظر</option>
-                        <option value="temporary">حظر مؤقت</option>
-                        <option value="permanent">حظر دائم</option>
-                        <option value="disabled">تعطيل الحساب</option>
-                        <option value="unknown">غير معروف</option>
-                    </select>
-                </div>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="noAppeal" name="noAppeal" required>
-                    <label for="noAppeal">أؤكد أنني لم أقدم طعنًا على الحظر من قبل</label>
-                </div>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="removeBan" name="removeBan" required>
-                    <label for="removeBan">أوافق على إزالة الحظر والالتزام بشروط الانستقرام</label>
-                </div>
-                
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <span id="btnText">إرسال الطلب (15$)</span>
-                    <i class="fas fa-spinner spinner" id="spinner"></i>
-                </button>
-            </form>
-        </div>
-        
-        <!-- نموذج تسجيل الدخول -->
-        <div class="login-container" id="loginForm">
-            <h2 class="form-title">تسجيل الدخول</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="loginUsername"><i class="fas fa-user"></i> اسم المستخدم</label>
-                    <input type="text" id="loginUsername" name="loginUsername" required placeholder="أدخل اسم المستخدم">
-                </div>
-                
-                <div class="form-group">
-                    <label for="loginPassword"><i class="fas fa-lock"></i> كلمة المرور</label>
-                    <input type="password" id="loginPassword" name="loginPassword" required placeholder="أدخل كلمة المرور">
-                </div>
-                
-                <div class="form-group">
-                    <label for="captcha">أدخل الرمز الظاهر أدناه</label>
-                    <div class="captcha-box" id="captchaCode">5T0K3N</div>
-                    <input type="text" id="captcha" name="captcha" required placeholder="أدخل الرمز">
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <span>تسجيل الدخول</span>
-                </button>
-            </form>
-            
-            <p style="margin-top: 20px; color: #ccc;">
-                ليس لديك حساب؟ <a href="#" onclick="showRegister()" style="color: var(--purple);">إنشاء حساب جديد</a>
-            </p>
-        </div>
-        
-        <!-- نموذج إنشاء حساب -->
-        <div class="login-container" id="registerForm">
-            <h2 class="form-title">إنشاء حساب جديد</h2>
-            <form id="register-form">
-                <div class="form-group">
-                    <label for="regUsername"><i class="fas fa-user"></i> اسم المستخدم</label>
-                    <input type="text" id="regUsername" name="regUsername" required placeholder="اختر اسم مستخدم">
-                </div>
-                
-                <div class="form-group">
-                    <label for="regEmail"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
-                    <input type="email" id="regEmail" name="regEmail" required placeholder="أدخل بريدك الإلكتروني">
-                </div>
-                
-                <div class="form-group">
-                    <label for="regPassword"><i class="fas fa-lock"></i> كلمة المرور</label>
-                    <input type="password" id="regPassword" name="regPassword" required placeholder="اختر كلمة مرور قوية">
-                </div>
-                
-                <div class="form-group">
-                    <label for="regConfirmPassword"><i class="fas fa-lock"></i> تأكيد كلمة المرور</label>
-                    <input type="password" id="regConfirmPassword" name="regConfirmPassword" required placeholder="أعد إدخال كلمة المرور">
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <span>إنشاء حساب</span>
-                </button>
-            </form>
-            
-            <p style="margin-top: 20px; color: #ccc;">
-                لديك حساب already؟ <a href="#" onclick="showLogin()" style="color: var(--purple);">تسجيل الدخول</a>
-            </p>
-        </div>
-        
-        <!-- لوحة تحكم الأدمن -->
-        <div class="admin-panel" id="adminPanel">
-            <div class="admin-header">
-                <h2>لوحة تحكم الأدمن</h2>
-                <button class="btn btn-secondary" onclick="adminLogout()">تسجيل خروج</button>
-            </div>
-            
-            <div class="admin-tabs">
-                <div class="admin-tab active" data-tab="users">المستخدمين</div>
-                <div class="admin-tab" data-tab="requests">طلبات الاسترجاع</div>
-                <div class="admin-tab" data-tab="support">طلبات الدعم</div>
-                <div class="admin-tab" data-tab="codes">أكواد الشحن</div>
-                <div class="admin-tab" data-tab="stats">الإحصائيات</div>
-            </div>
-            
-            <div class="admin-content active" id="usersTab">
-                <h3>إدارة المستخدمين</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>اسم المستخدم</th>
-                            <th>البريد الإلكتروني</th>
-                            <th>رصيده</th>
-                            <th>عدد الطلبات</th>
-                            <th>تاريخ التسجيل</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usersTableBody">
-                        <!-- سيتم ملء هذا الجدول بالبيانات -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="admin-content" id="requestsTab">
-                <h3>طلبات استرجاع الحسابات</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>المستخدم</th>
-                            <th>حساب الانستقرام</th>
-                            <th>نوع الحظر</th>
-                            <th>التاريخ</th>
-                            <th>الحالة</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="requestsTableBody">
-                        <!-- سيتم ملء هذا الجدول بالبيانات -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="admin-content" id="supportTab">
-                <h3>طلبات الدعم الفني</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>المستخدم</th>
-                            <th>الموضوع</th>
-                            <th>التاريخ</th>
-                            <th>الحالة</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="supportTableBody">
-                        <!-- سيتم ملء هذا الجدول بالبيانات -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="admin-content" id="codesTab">
-                <h3>إدارة أكواد الشحن</h3>
-                <div class="form-group">
-                    <button class="btn btn-primary" onclick="generateChargeCode()">
-                        <i class="fas fa-plus"></i> إنشاء كود شحن جديد
-                    </button>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>كود الشحن</th>
-                            <th>القيمة</th>
-                            <th>الحالة</th>
-                            <th>تاريخ الإنشاء</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="codesTableBody">
-                        <!-- سيتم ملء هذا الجدول بالبيانات -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="admin-content" id="statsTab">
-                <h3>إحصائيات الموقع</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                    <div style="background: rgba(106, 13, 173, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
-                        <h3 id="totalUsers">0</h3>
-                        <p>إجمالي المستخدمين</p>
-                    </div>
-                    <div style="background: rgba(106, 13, 173, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
-                        <h3 id="totalRequests">0</h3>
-                        <p>إجمالي الطلبات</p>
-                    </div>
-                    <div style="background: rgba(106, 13, 173, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
-                        <h3 id="completedRequests">0</h3>
-                        <p>الطلبات المكتملة</p>
-                    </div>
-                    <div style="background: rgba(106, 13, 173, 0.3); padding: 20px; border-radius: 10px; text-align: center;">
-                        <h3 id="totalRevenue">0 $</h3>
-                        <p>إجمالي الإيرادات</p>
-                    </div>
-                </div>
+            <div class="social-links">
+                <a href="https://t.me/QEQQ6" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="https://t.me/QNQQ8" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="https://instagram.com/5T_O8" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-        
-        <footer>
-            <p>جميع الحقوق محفوظة © 2023 - <span>ASTRH.COM</span></p>
-            <p class="copyright">تصميم وتطوير: أسامة ليث</p>
-        </footer>
-    </div>
+    </header>
     
-    <!-- نافذة شحن الرصيد -->
-    <div class="modal" id="chargeModal">
-        <div class="modal-content">
-            <h2 class="modal-title">شحن الرصيد</h2>
-            <div class="form-group">
-                <label for="chargeCode">أدخل كود الشحن</label>
-                <input type="text" id="chargeCode" placeholder="أدخل الكود المكون من 16 رقم">
+    <div class="container">
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h2 class="sidebar-title">لوحة التحكم</h2>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> نظرة عامة</a></li>
+                    <li><a href="#"><i class="fas fa-plus-circle"></i> طلب جديد</a></li>
+                    <li><a href="#"><i class="fas fa-list"></i> الطلبات النشطة</a></li>
+                    <li><a href="#"><i class="fas fa-check-circle"></i> الطلبات المكتملة</a></li>
+                    <li><a href="#"><i class="fas fa-database"></i> إدارة البروكسيات</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> الإحصائيات</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> العملاء</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                </ul>
             </div>
             
-            <button class="close-btn" onclick="chargeAccount()">شحن الرصيد</button>
-            <p style="margin-top: 20px; color: #ccc;">
-                لطلب كود شحن، يرجى التواصل مع الدعم الفني
-            </p>
-            <button class="btn btn-secondary" style="margin-top: 10px;" onclick="showSupport()">
-                التواصل مع الدعم
-            </button>
-            <button class="close-btn" style="background: #333; margin-top: 10px;" onclick="closeModal('chargeModal')">إلغاء</button>
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="content-header">
+                    <h2 class="content-title">نظرة عامة على النظام</h2>
+                    <div class="current-time" id="current-time"></div>
+                </div>
+                
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>24,582</h3>
+                        <p>إجمالي المشاهدات</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <i class="fas fa-list"></i>
+                        <h3>47</h3>
+                        <p>الطلبات النشطة</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <i class="fas fa-server"></i>
+                        <h3>132</h3>
+                        <p>البروكسيات النشطة</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <h3>28</h3>
+                        <p>العملاء النشطين</p>
+                    </div>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="tabs">
+                    <div class="tab active" data-tab="orders">الطلبات الحديثة</div>
+                    <div class="tab" data-tab="proxies">البروكسيات النشطة</div>
+                    <div class="tab" data-tab="add-order">إضافة طلب جديد</div>
+                </div>
+                
+                <!-- Orders Tab -->
+                <div class="tab-content active" id="orders-tab">
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="table-title">الطلبات الحديثة</h3>
+                            <button class="btn btn-sm"><i class="fas fa-sync"></i> تحديث</button>
+                        </div>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>القناة</th>
+                                    <th>المشاهدات</th>
+                                    <th>المضاف</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@technology_news</td>
+                                    <td>5000 / 5000</td>
+                                    <td>4872</td>
+                                    <td><span class="status status-active">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm"><i class="fas fa-pause"></i></button>
+                                        <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@sports_updates</td>
+                                    <td>10000 / 10000</td>
+                                    <td>7543</td>
+                                    <td><span class="status status-active">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm"><i class="fas fa-pause"></i></button>
+                                        <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@music_lovers</td>
+                                    <td>2500 / 2500</td>
+                                    <td>2500</td>
+                                    <td><span class="status status-active">مكتمل</span></td>
+                                    <td>
+                                        <button class="btn btn-sm"><i class="fas fa-info"></i></button>
+                                        <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@programming_tips</td>
+                                    <td>8000 / 8000</td>
+                                    <td>5210</td>
+                                    <td><span class="status status-active">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm"><i class="fas fa-pause"></i></button>
+                                        <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Proxies Tab -->
+                <div class="tab-content" id="proxies-tab">
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="table-title">البروكسيات النشطة</h3>
+                            <button class="btn btn-sm"><i class="fas fa-plus"></i> إضافة بروكسي</button>
+                        </div>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>البروكسي</th>
+                                    <th>النوع</th>
+                                    <th>السرعة</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>192.168.1.1:8080</td>
+                                    <td>HTTP</td>
+                                    <td>125 ms</td>
+                                    <td><span class="status status-active">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm"><i class="fas fa-sync"></i></button>
+                                        <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>172.16.0.1:3128</td>
+                                    <td>HTTPS</td>
+                                    <td>98 ms</td>
+                                    <td><span class="status status-active">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm"><i class="fas fa-sync"></i></button>
+                                        <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10.0.0.1:8080</td>
+                                    <td>SOCKS5</td>
+                                    <td>152 ms</td>
+                                    <td><span class="status status-pending">بطيء</span></td>
+                                    <td>
+                                        <button class="btn btn-sm"><i class="fas fa-sync"></i></button>
+                                        <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>192.168.0.5:8080</td>
+                                    <td>HTTP</td>
+                                    <td>87 ms</td>
+                                    <td><span class="status status-active">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm"><i class="fas fa-sync"></i></button>
+                                        <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Add Order Tab -->
+                <div class="tab-content" id="add-order-tab">
+                    <div class="form-container">
+                        <h3 class="form-title">إضافة طلب جديد</h3>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="channel"><i class="fas fa-link"></i> يوزر قناة التليجرام</label>
+                                <input type="text" id="channel" placeholder="مثال: @my_channel">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="views"><i class="fas fa-eye"></i> عدد المشاهدات المطلوبة</label>
+                                <input type="number" id="views" placeholder="مثال: 1000">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="stop-date"><i class="fas fa-calendar-times"></i> تاريخ إيقاف الرشق</label>
+                                <input type="date" id="stop-date">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="duration"><i class="fas fa-clock"></i> مدة إكمال الرشق (بالدقائق)</label>
+                                <input type="number" id="duration" placeholder="مثال: 60 (دقيقة)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="proxy-type"><i class="fas fa-server"></i> نوع البروكسي المطلوب</label>
+                            <select id="proxy-type">
+                                <option value="auto">تلقائي (موصى به)</option>
+                                <option value="http">HTTP</option>
+                                <option value="https">HTTPS</option>
+                                <option value="socks4">SOCKS4</option>
+                                <option value="socks5">SOCKS5</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-block">
+                            <i class="fas fa-paper-plane"></i> إرسال الطلب والبدء فوراً
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <!-- نافذة الدعم الفني -->
-    <div class="modal" id="supportModal">
-        <div class="modal-content">
-            <h2 class="modal-title">التواصل مع الدعم الفني</h2>
-            <div class="form-group">
-                <label for="supportSubject">الموضوع</label>
-                <input type="text" id="supportSubject" placeholder="موضوع المشكلة">
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="copyright">
+                جميع الحقوق محفوظة &copy; 2023 - <span>أسامة ليث</span>
             </div>
             
-            <div class="form-group">
-                <label for="supportMessage">الرسالة</label>
-                <textarea id="supportMessage" rows="5" placeholder="صف مشكلتك بالتفصيل"></textarea>
+            <div class="footer-links">
+                <a href="https://t.me/QEQQ6" target="_blank">قناة التليجرام</a>
+                <a href="https://t.me/QNQQ8" target="_blank">تواصل مع المطور</a>
+                <a href="https://instagram.com/5T_O8" target="_blank">انستجرام المطور</a>
             </div>
             
-            <button class="close-btn" onclick="sendSupportRequest()">إرسال</button>
-            <button class="close-btn" style="background: #333; margin-top: 10px;" onclick="closeModal('supportModal')">إلغاء</button>
-        </div>
-    </div>
-    
-    <!-- نافذة الطلبات -->
-    <div class="modal" id="requestsModal">
-        <div class="modal-content">
-            <h2 class="modal-title">طلباتك السابقة</h2>
-            <div id="requestsList">
-                <p style="color: #ccc; text-align: center; padding: 20px;">لا توجد طلبات سابقة</p>
+            <div class="developer">
+                تم التطوير بواسطة: أسامة ليث
             </div>
-            <button class="close-btn" style="background: #333; margin-top: 10px;" onclick="closeModal('requestsModal')">إغلاق</button>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // قاعدة البيانات المحلية
-        function initDatabase() {
-            if (!localStorage.getItem('users')) {
-                // إنشاء حساب الأدمن الافتراضي
-                const adminUser = {
-                    id: 1,
-                    username: '5t_o1',
-                    password: '1122334455mmnn',
-                    email: 'admin@astrh.com',
-                    balance: 0,
-                    isAdmin: true,
-                    registrationDate: new Date().toISOString()
-                };
-                
-                localStorage.setItem('users', JSON.stringify([adminUser]));
-            }
-            
-            if (!localStorage.getItem('chargeCodes')) {
-                localStorage.setItem('chargeCodes', JSON.stringify([]));
-            }
-            
-            if (!localStorage.getItem('recoveryRequests')) {
-                localStorage.setItem('recoveryRequests', JSON.stringify([]));
-            }
-            
-            if (!localStorage.getItem('supportRequests')) {
-                localStorage.setItem('supportRequests', JSON.stringify([]));
-            }
-        }
-        
-        // توليد كابتشا عشوائي
-        function generateCaptcha() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            let captcha = "";
-            for (let i = 0; i < 6; i++) {
-                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            document.getElementById('captchaCode').textContent = captcha;
-            return captcha;
-        }
-        
-        let currentCaptcha = generateCaptcha();
-        
-        // إظهار وإخفاء النماذج
-        function showLogin() {
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('requestForm').style.display = 'none';
-            document.getElementById('adminPanel').style.display = 'none';
-            currentCaptcha = generateCaptcha();
-        }
-        
-        function showRegister() {
-            document.getElementById('registerForm').style.display = 'block';
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('requestForm').style.display = 'none';
-            document.getElementById('adminPanel').style.display = 'none';
-        }
-        
-        function showRequestForm() {
-            document.getElementById('requestForm').style.display = 'block';
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('adminPanel').style.display = 'none';
-            document.getElementById('authButtons').style.display = 'none';
-            document.getElementById('userMenu').style.display = 'flex';
-        }
-        
-        function showAdminPanel() {
-            document.getElementById('adminPanel').style.display = 'block';
-            document.getElementById('requestForm').style.display = 'none';
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('authButtons').style.display = 'none';
-            document.getElementById('userMenu').style.display = 'none';
-            loadAdminData();
-        }
-        
-        // القائمة المنسدلة
-        function toggleMenu() {
-            const menu = document.getElementById('dropdownMenu');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-        
-        // إغلاق القائمة عند النقر خارجها
-        window.addEventListener('click', function(e) {
-            if (!e.target.matches('.menu-icon') && !e.target.matches('.menu-icon *')) {
-                document.getElementById('dropdownMenu').style.display = 'none';
-            }
-        });
-        
-        // إظهار النوافذ المنبثقة
-        function showChargeModal() {
-            document.getElementById('chargeModal').style.display = 'flex';
-            document.getElementById('dropdownMenu').style.display = 'none';
-        }
-        
-        function showSupport() {
-            document.getElementById('supportModal').style.display = 'flex';
-            document.getElementById('dropdownMenu').style.display = 'none';
-        }
-        
-        function showRequests() {
-            document.getElementById('requestsModal').style.display = 'flex';
-            document.getElementById('dropdownMenu').style.display = 'none';
-            loadRequests();
-        }
-        
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-        
-        // تسجيل الدخول
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            const captcha = document.getElementById('captcha').value;
-            
-            if (captcha !== currentCaptcha) {
-                alert('الرمز غير صحيح، يرجى المحاولة مرة أخرى');
-                currentCaptcha = generateCaptcha();
-                return;
-            }
-            
-            // البحث عن المستخدم في قاعدة البيانات
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const user = users.find(u => u.username === username && u.password === password);
-            
-            if (user) {
-                // حفظ حالة تسجيل الدخول
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                
-                if (user.isAdmin) {
-                    showAdminPanel();
-                } else {
-                    showRequestForm();
-                    document.getElementById('balanceAmount').textContent = user.balance || 0;
-                }
-            } else {
-                alert('اسم المستخدم أو كلمة المرور غير صحيحة');
-            }
-        });
-        
-        // تسجيل حساب جديد
-        document.getElementById('register-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('regUsername').value;
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-            
-            if (password !== confirmPassword) {
-                alert('كلمة المرور غير متطابقة');
-                return;
-            }
-            
-            // التحقق من عدم وجود مستخدم بنفس الاسم
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userExists = users.some(u => u.username === username);
-            
-            if (userExists) {
-                alert('اسم المستخدم موجود مسبقاً، يرجى اختيار اسم آخر');
-                return;
-            }
-            
-            // إنشاء حساب جديد
-            const newUser = {
-                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 2,
-                username,
-                email,
-                password,
-                balance: 0,
-                isAdmin: false,
-                registrationDate: new Date().toISOString()
+        // تحديث الوقت الحالي
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
             };
-            
-            users.push(newUser);
-            localStorage.setItem('users', JSON.stringify(users));
-            
-            alert('تم إنشاء حسابك بنجاح! يرجى تسجيل الدخول الآن.');
-            showLogin();
-        });
-        
-        // إرسال طلب الاسترجاع
-        document.getElementById('recovery-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-            
-            if (!currentUser.id) {
-                alert('يجب تسجيل الدخول أولاً');
-                showLogin();
-                return;
-            }
-            
-            if (currentUser.balance < 15) {
-                alert('رصيدك غير كافٍ لإنشاء طلب جديد. يرجى شحن الرصيد.');
-                showChargeModal();
-                return;
-            }
-            
-            // خصم 15 دولار
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userIndex = users.findIndex(u => u.id === currentUser.id);
-            
-            if (userIndex !== -1) {
-                users[userIndex].balance -= 15;
-                localStorage.setItem('users', JSON.stringify(users));
-                
-                // تحديث المستخدم الحالي
-                currentUser.balance = users[userIndex].balance;
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                document.getElementById('balanceAmount').textContent = currentUser.balance;
-            }
-            
-            // جمع بيانات النموذج
-            const formData = {
-                username: document.getElementById('username').value,
-                email: document.getElementById('email').value,
-                name: document.getElementById('name').value,
-                device: document.getElementById('device').value,
-                banType: document.getElementById('banType').value
-            };
-            
-            // حفظ الطلب
-            const requests = JSON.parse(localStorage.getItem('recoveryRequests') || '[]');
-            const newRequest = {
-                id: requests.length > 0 ? Math.max(...requests.map(r => r.id)) + 1 : 1,
-                userId: currentUser.id,
-                username: currentUser.username,
-                ...formData,
-                date: new Date().toLocaleDateString(),
-                status: 'قيد التنفيذ',
-                createdAt: new Date().toISOString()
-            };
-            
-            requests.push(newRequest);
-            localStorage.setItem('recoveryRequests', JSON.stringify(requests));
-            
-            // إظهار رسالة النجاح
-            alert('تم إرسال طلبك بنجاح وخصم 15$ من رصيدك. سيتم مراجعة طلبك خلال 24 ساعة.');
-            
-            // مسح النموذج
-            document.getElementById('recovery-form').reset();
-        });
-        
-        // شحن الرصيد
-        function chargeAccount() {
-            const chargeCode = document.getElementById('chargeCode').value;
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-            
-            if (!currentUser.id) {
-                alert('يجب تسجيل الدخول أولاً');
-                return;
-            }
-            
-            if (!chargeCode || chargeCode.length !== 16) {
-                alert('كود الشحن يجب أن يكون مكون من 16 حرف/رقم');
-                return;
-            }
-            
-            // البحث عن كود الشحن
-            const chargeCodes = JSON.parse(localStorage.getItem('chargeCodes') || '[]');
-            const codeIndex = chargeCodes.findIndex(c => c.code === chargeCode && !c.used);
-            
-            if (codeIndex === -1) {
-                alert('كود الشحن غير صالح أو مستخدم مسبقاً');
-                return;
-            }
-            
-            // استخدام الكود وإضافة الرصيد
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const userIndex = users.findIndex(u => u.id === currentUser.id);
-            
-            if (userIndex !== -1) {
-                users[userIndex].balance += chargeCodes[codeIndex].amount;
-                chargeCodes[codeIndex].used = true;
-                chargeCodes[codeIndex].usedBy = currentUser.id;
-                chargeCodes[codeIndex].usedAt = new Date().toISOString();
-                
-                localStorage.setItem('users', JSON.stringify(users));
-                localStorage.setItem('chargeCodes', JSON.stringify(chargeCodes));
-                
-                // تحديث المستخدم الحالي
-                currentUser.balance = users[userIndex].balance;
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                document.getElementById('balanceAmount').textContent = currentUser.balance;
-                
-                alert(`تم شحن ${chargeCodes[codeIndex].amount}$ إلى رصيدك بنجاح!`);
-                closeModal('chargeModal');
-                document.getElementById('chargeCode').value = '';
-            }
+            document.getElementById('current-time').textContent = now.toLocaleDateString('ar-EG', options);
         }
         
-        // إرسال طلب الدعم
-        function sendSupportRequest() {
-            const subject = document.getElementById('supportSubject').value;
-            const message = document.getElementById('supportMessage').value;
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-            
-            if (!currentUser.id) {
-                alert('يجب تسجيل الدخول أولاً');
-                return;
-            }
-            
-            if (!subject || !message) {
-                alert('يرجى ملء جميع الحقول');
-                return;
-            }
-            
-            // حفظ طلب الدعم
-            const supportRequests = JSON.parse(localStorage.getItem('supportRequests') || '[]');
-            supportRequests.push({
-                id: supportRequests.length > 0 ? Math.max(...supportRequests.map(s => s.id)) + 1 : 1,
-                userId: currentUser.id,
-                username: currentUser.username,
-                subject,
-                message,
-                status: 'مفتوح',
-                date: new Date().toLocaleDateString(),
-                createdAt: new Date().toISOString()
-            });
-            
-            localStorage.setItem('supportRequests', JSON.stringify(supportRequests));
-            
-            alert('تم إرسال رسالتك إلى الدعم الفني. سيتم الرد عليك خلال 24 ساعة.');
-            closeModal('supportModal');
-            document.getElementById('supportSubject').value = '';
-            document.getElementById('supportMessage').value = '';
-        }
+        setInterval(updateTime, 1000);
+        updateTime();
         
-        // تحميل الطلبات السابقة
-        function loadRequests() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-            const requests = JSON.parse(localStorage.getItem('recoveryRequests') || '[]');
-            const userRequests = requests.filter(r => r.userId === currentUser.id);
-            const requestsList = document.getElementById('requestsList');
-            
-            if (userRequests.length === 0) {
-                requestsList.innerHTML = '<p style="color: #ccc; text-align: center; padding: 20px;">لا توجد طلبات سابقة</p>';
-                return;
-            }
-            
-            requestsList.innerHTML = '';
-            userRequests.forEach((request, index) => {
-                const requestItem = document.createElement('div');
-                requestItem.style.background = 'rgba(50, 50, 50, 0.5)';
-                requestItem.style.padding = '15px';
-                requestItem.style.borderRadius = '8px';
-                requestItem.style.marginBottom = '10px';
-                requestItem.style.borderLeft = `4px solid ${request.status === 'قيد التنفيذ' ? '#6a0dad' : '#8B0000'}`;
-                
-                requestItem.innerHTML = `
-                    <h3 style="margin-bottom: 10px;">طلب #${index + 1}</h3>
-                    <p><strong>اليوزر:</strong> ${request.username}</p>
-                    <p><strong>الحالة:</strong> ${request.status}</p>
-                    <p><strong>التاريخ:</strong> ${request.date}</p>
-                `;
-                
-                requestsList.appendChild(requestItem);
-            });
-        }
-        
-        // تحميل بيانات الأدمن
-        function loadAdminData() {
-            // تحميل المستخدمين
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const usersTable = document.getElementById('usersTableBody');
-            usersTable.innerHTML = '';
-            
-            users.forEach(user => {
-                if (!user.isAdmin) {
-                    const userRequests = JSON.parse(localStorage.getItem('recoveryRequests') || '[]')
-                        .filter(r => r.userId === user.id);
-                    
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${user.username}</td>
-                        <td>${user.email}</td>
-                        <td>${user.balance || 0} $</td>
-                        <td>${userRequests.length}</td>
-                        <td>${new Date(user.registrationDate).toLocaleDateString()}</td>
-                        <td>
-                            <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">تفاصيل</button>
-                        </td>
-                    `;
-                    usersTable.appendChild(row);
-                }
-            });
-            
-            // تحميل الطلبات
-            const requests = JSON.parse(localStorage.getItem('recoveryRequests') || '[]');
-            const requestsTable = document.getElementById('requestsTableBody');
-            requestsTable.innerHTML = '';
-            
-            requests.forEach(request => {
-                const user = users.find(u => u.id === request.userId);
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user ? user.username : 'غير معروف'}</td>
-                    <td>${request.username}</td>
-                    <td>${request.banType}</td>
-                    <td>${request.date}</td>
-                    <td><span class="status-badge status-pending">${request.status}</span></td>
-                    <td>
-                        <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">تعديل</button>
-                    </td>
-                `;
-                requestsTable.appendChild(row);
-            });
-            
-            // تحميل طلبات الدعم
-            const supportRequests = JSON.parse(localStorage.getItem('supportRequests') || '[]');
-            const supportTable = document.getElementById('supportTableBody');
-            supportTable.innerHTML = '';
-            
-            supportRequests.forEach(request => {
-                const user = users.find(u => u.id === request.userId);
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user ? user.username : 'غير معروف'}</td>
-                    <td>${request.subject}</td>
-                    <td>${request.date}</td>
-                    <td><span class="status-badge status-pending">${request.status}</span></td>
-                    <td>
-                        <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">رد</button>
-                    </td>
-                `;
-                supportTable.appendChild(row);
-            });
-            
-            // تحميل أكواد الشحن
-            const chargeCodes = JSON.parse(localStorage.getItem('chargeCodes') || '[]');
-            const codesTable = document.getElementById('codesTableBody');
-            codesTable.innerHTML = '';
-            
-            chargeCodes.forEach(code => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${code.code}</td>
-                    <td>${code.amount} $</td>
-                    <td>${code.used ? 'مستخدم' : 'نشط'}</td>
-                    <td>${new Date(code.createdAt).toLocaleDateString()}</td>
-                    <td>
-                        <button class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">نسخ</button>
-                    </td>
-                `;
-                codesTable.appendChild(row);
-            });
-            
-            // تحميل الإحصائيات
-            document.getElementById('totalUsers').textContent = users.filter(u => !u.isAdmin).length;
-            document.getElementById('totalRequests').textContent = requests.length;
-            document.getElementById('completedRequests').textContent = requests.filter(r => r.status === 'مكتمل').length;
-            
-            const totalRevenue = requests.length * 15;
-            document.getElementById('totalRevenue').textContent = `${totalRevenue} $`;
-        }
-        
-        // إنشاء كود شحن جديد
-        function generateChargeCode() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            let code = "";
-            for (let i = 0; i < 16; i++) {
-                code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            
-            const chargeCodes = JSON.parse(localStorage.getItem('chargeCodes') || '[]');
-            chargeCodes.push({
-                code,
-                amount: 50,
-                used: false,
-                createdAt: new Date().toISOString()
-            });
-            
-            localStorage.setItem('chargeCodes', JSON.stringify(chargeCodes));
-            loadAdminData();
-            
-            alert(`تم إنشاء كود الشحن: ${code}`);
-        }
-        
-        // تسجيل الخروج
-        function logout() {
-            localStorage.removeItem('currentUser');
-            document.getElementById('userMenu').style.display = 'none';
-            document.getElementById('authButtons').style.display = 'flex';
-            document.getElementById('requestForm').style.display = 'none';
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('dropdownMenu').style.display = 'none';
-        }
-        
-        function adminLogout() {
-            localStorage.removeItem('currentUser');
-            document.getElementById('adminPanel').style.display = 'none';
-            document.getElementById('authButtons').style.display = 'flex';
-        }
-        
-        // تبديل علامات التبويب في لوحة الأدمن
-        document.querySelectorAll('.admin-tab').forEach(tab => {
+        // نظام التبويبات
+        document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
-                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+                // إزالة النشط من جميع التبويبات
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('active');
+                });
                 
+                // إضافة النشط للتبويب الحالي
                 this.classList.add('active');
-                document.getElementById(this.dataset.tab + 'Tab').classList.add('active');
+                
+                // إخفاء جميع محتويات التبويبات
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // إظهار المحتوى المرتبط بالتبويب
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.add('active');
             });
         });
         
-        // التحقق من حالة تسجيل الدخول عند تحميل الصفحة
-        window.addEventListener('load', function() {
-            initDatabase();
-            
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-            
-            if (currentUser.id) {
-                if (currentUser.isAdmin) {
-                    showAdminPanel();
-                } else {
-                    showRequestForm();
-                    document.getElementById('balanceAmount').textContent = currentUser.balance || 0;
+        // محاكاة تحديث الإحصائيات
+        setInterval(() => {
+            const stats = document.querySelectorAll('.stat-card h3');
+            stats.forEach(stat => {
+                const current = parseInt(stat.textContent.replace(/,/g, ''));
+                if (stat.parentElement.querySelector('p').textContent === 'إجمالي المشاهدات') {
+                    const newValue = current + Math.floor(Math.random() * 10);
+                    stat.textContent = newValue.toLocaleString();
                 }
+            });
+        }, 5000);
+        
+        // محاكاة إرسال الطلب
+        document.querySelector('.btn-block').addEventListener('click', function() {
+            const channel = document.getElementById('channel').value;
+            const views = document.getElementById('views').value;
+            const stopDate = document.getElementById('stop-date').value;
+            const duration = document.getElementById('duration').value;
+            
+            if (!channel || !views || !stopDate || !duration) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
             }
+            
+            // محاكاة إرسال الطلب
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                alert('تم استلام طلبك بنجاح! سيبدأ نظامنا بمعالجة طلبك قريباً.');
+                this.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الطلب والبدء فوراً';
+                this.disabled = false;
+                
+                // مسح الحقول
+                document.getElementById('channel').value = '';
+                document.getElementById('views').value = '';
+                document.getElementById('stop-date').value = '';
+                document.getElementById('duration').value = '';
+            }, 2000);
         });
     </script>
 </body>
-                        </html>
+    </html>
