@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Views Boost - زيادة مشاهدات تليجرام</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>استضافة ويب - حلول الاستضافة المتكاملة</title>
     <style>
         :root {
             --primary: #8A2BE2; /* بنفسجي */
-            --secondary: #FF0000; /* أحمر */
-            --dark: #000000; /* أسود */
+            --secondary: #DC143C; /* أحمر */
+            --dark: #222; /* أسود */
             --light: #f8f9fa;
-            --gray: #6c757d;
-            --success: #28a745;
-            --warning: #ffc107;
-            --info: #17a2b8;
         }
         
         * {
@@ -25,808 +20,445 @@
         }
         
         body {
-            background-color: #0a0a1a;
-            color: var(--light);
-            background-image: linear-gradient(to bottom, #0a0a1a, #1a0033);
-            min-height: 100vh;
-            padding-bottom: 20px;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
         }
         
         .container {
-            width: 100%;
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
         
-        /* Header Styles */
+        /* التصميم الشريطي العلوي */
         header {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--dark));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .header-content {
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
-            display: flex;
-            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
         }
         
-        .logo h1 {
-            color: var(--primary);
-            font-size: 24px;
-            margin-left: 10px;
-        }
-        
-        .logo span {
-            color: var(--secondary);
-        }
-        
-        nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
         }
         
-        nav ul li {
-            margin-left: 20px;
+        .nav-links li {
+            margin-left: 2rem;
         }
         
-        nav ul li a {
-            color: var(--light);
+        .nav-links a {
+            color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
-            padding: 10px 15px;
-            border-radius: 5px;
+            transition: all 0.3s ease;
         }
         
-        nav ul li a:hover, 
-        nav ul li a.active {
-            color: var(--primary);
-            background-color: rgba(138, 43, 226, 0.1);
+        .nav-links a:hover {
+            color: var(--secondary);
         }
         
-        .social-links a {
-            color: var(--light);
-            font-size: 20px;
-            margin-left: 15px;
-            transition: color 0.3s;
+        .auth-buttons button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
         
-        .social-links a:hover {
-            color: var(--primary);
+        .auth-buttons button:hover {
+            background-color: #b80c2c;
         }
         
-        /* Hero Section */
+        /* قسم الهيرو */
         .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1500');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
             text-align: center;
-            padding: 60px 0;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            margin: 30px 0;
-            border: 1px solid var(--primary);
         }
         
-        .hero h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: var(--primary);
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
         
         .hero p {
-            font-size: 18px;
-            color: var(--light);
+            font-size: 1.2rem;
             max-width: 800px;
-            margin: 0 auto 30px;
+            margin: 0 auto 2rem;
         }
         
-        /* Form Styles */
-        .order-form {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            border: 1px solid var(--primary);
+        .cta-button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
         
-        .form-title {
+        .cta-button:hover {
+            background-color: #b80c2c;
+            transform: translateY(-3px);
+        }
+        
+        /* قسم الميزات */
+        .features {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
             text-align: center;
+            margin-bottom: 3rem;
             color: var(--primary);
-            margin-bottom: 30px;
-            font-size: 28px;
         }
         
-        .form-grid {
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        /* نماذج الدخول والتسجيل */
+        .auth-forms {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .auth-forms.active {
+            display: block;
+        }
+        
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .close-form {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: var(--light);
+            margin-bottom: 0.5rem;
             font-weight: 500;
         }
         
-        .form-group input, 
-        .form-group select {
+        .form-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: var(--light);
-            font-size: 16px;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
         }
         
-        .form-group input:focus, 
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
+        .form-submit {
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 0.8rem;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        
-        .btn:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
-        }
-        
-        .btn-block {
-            display: block;
             width: 100%;
-        }
-        
-        /* Orders Section */
-        .orders-section {
-            display: none;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            border: 1px solid var(--primary);
-        }
-        
-        .section-title {
-            color: var(--primary);
-            margin-bottom: 30px;
-            font-size: 28px;
-            text-align: center;
-        }
-        
-        .orders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .order-card {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            padding: 20px;
-            border: 1px solid var(--primary);
-            transition: transform 0.3s;
-        }
-        
-        .order-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--secondary);
-        }
-        
-        .order-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            border-bottom: 1px solid var(--primary);
-            padding-bottom: 10px;
-        }
-        
-        .order-stat {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-        }
-        
-        .order-stat:last-child {
-            border-bottom: none;
-        }
-        
-        .stat-value {
-            color: var(--secondary);
-            font-weight: 500;
-        }
-        
-        /* Proxy Status */
-        .proxy-status {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 1px solid var(--primary);
-            text-align: center;
-        }
-        
-        .proxy-status h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        
-        .proxy-status p {
-            color: var(--light);
-        }
-        
-        .status-active {
-            color: #28a745 !important;
+            font-size: 1rem;
             font-weight: bold;
+            transition: all 0.3s ease;
         }
         
-        .status-inactive {
-            color: var(--secondary) !important;
-            font-weight: bold;
+        .form-submit:hover {
+            background-color: #7329c0;
         }
         
-        /* Tabs */
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--primary);
+        .form-footer {
+            text-align: center;
+            margin-top: 1rem;
         }
         
-        .tab {
-            padding: 12px 25px;
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
             cursor: pointer;
-            color: var(--light);
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
         }
         
-        .tab.active {
-            color: var(--primary);
-            border-bottom: 3px solid var(--primary);
-        }
-        
-        .tab-content {
+        .overlay {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
         
-        .tab-content.active {
+        .overlay.active {
             display: block;
         }
         
-        /* Footer */
+        /* التذييل */
         footer {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 30px 0;
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
             text-align: center;
-            margin-top: 50px;
-            border-top: 2px solid var(--primary);
         }
         
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .copyright {
-            margin-bottom: 20px;
-            color: var(--light);
-        }
-        
-        .copyright span {
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links a {
-            color: var(--light);
-            margin: 0 15px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-        
-        .developer {
-            color: var(--gray);
-            font-size: 14px;
-        }
-        
-        /* Responsive */
+        /* التجاوب مع الشاشات الصغيرة */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
+            .nav-links {
+                display: none;
             }
             
-            nav ul {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 5px;
-            }
-            
-            .social-links {
-                margin-top: 20px;
-            }
-            
-            .hero h2 {
-                font-size: 28px;
+            .hero h1 {
+                font-size: 2.2rem;
             }
             
             .hero p {
-                font-size: 16px;
+                font-size: 1rem;
             }
-            
-            .tabs {
-                flex-direction: column;
-            }
-            
-            .tab {
-                text-align: center;
-            }
-        }
-        
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            display: none;
-            animation: fadeIn 0.3s;
-        }
-        
-        .notification.success {
-            background: var(--success);
-        }
-        
-        .notification.error {
-            background: var(--secondary);
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
-    
-    <!-- Header -->
+    <!-- الشريط العلوي -->
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <h1>Telegram<span>Views</span></h1>
-            </div>
-            
+        <div class="container">
             <nav>
-                <ul>
-                    <li><a href="#" class="active" data-section="home">الرئيسية</a></li>
-                    <li><a href="#" data-section="orders">الطلبات</a></li>
-                    <li><a href="#" data-section="proxy">البروكسي</a></li>
+                <div class="logo">استضافة ويب</div>
+                <ul class="nav-links">
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">الخدمات</a></li>
+                    <li><a href="#">الأسعار</a></li>
+                    <li><a href="#">عنّا</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
                 </ul>
+                <div class="auth-buttons">
+                    <button id="login-btn">تسجيل الدخول</button>
+                    <button id="register-btn">إنشاء حساب</button>
+                </div>
             </nav>
-            
-            <div class="social-links">
-                <a href="https://t.me/QEQQ6" target="_blank"><i class="fab fa-telegram"></i></a>
-                <a href="https://t.me/QNQQ8" target="_blank"><i class="fab fa-telegram"></i></a>
-                <a href="https://instagram.com/5T_O8" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
         </div>
     </header>
-    
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <h2>زيادة مشاهدات تليجرام المستقبلية</h2>
-            <p>قم بزيادة مشاهدات منشورات قناتك على تليجرام بسرعة فائقة وجودة عالية مع خدمتنا المميزة</p>
-        </section>
-        
-        <!-- Tabs -->
-        <div class="tabs">
-            <div class="tab active" data-tab="order">طلب جديد</div>
-            <div class="tab" data-tab="stats">الإحصائيات</div>
-            <div class="tab" data-tab="proxy-info">معلومات البروكسي</div>
+
+    <!-- قسم الهيرو -->
+    <section class="hero">
+        <div class="container">
+            <h1>استضافة مواقع قوية وآمنة</h1>
+            <p>قدم لمشروعك الإلكتروني أفضل حلول الاستضافة مع أداء عالي، أمان متقدم، ودعم فني متاح على مدار الساعة</p>
+            <button class="cta-button">ابدأ الآن</button>
         </div>
-        
-        <!-- Order Form -->
-        <section class="tab-content active" id="order-tab">
-            <div class="order-form">
-                <h2 class="form-title">طلب زيادة المشاهدات</h2>
-                
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="channel"><i class="fas fa-link"></i> يوزر قناة التليجرام</label>
-                        <input type="text" id="channel" placeholder="مثال: @my_channel">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="views"><i class="fas fa-eye"></i> عدد المشاهدات المطلوبة</label>
-                        <input type="number" id="views" placeholder="مثال: 1000">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="stop-date"><i class="fas fa-calendar-times"></i> تاريخ إيقاف الرشق</label>
-                        <input type="date" id="stop-date">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="duration"><i class="fas fa-clock"></i> مدة إكمال الرشق (بالدقائق)</label>
-                        <input type="number" id="duration" placeholder="مثال: 60 (دقيقة)">
-                    </div>
+    </section>
+
+    <!-- قسم الميزات -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">ميزات استضافتنا</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>رفع الملفات</h3>
+                    <p>ادفع ملفات موقعك بسهولة عبر واجهة ويب بديهية تدعم HTML/PHP/Python</p>
                 </div>
-                
-                <button class="btn btn-block" id="submit-btn">
-                    <i class="fas fa-paper-plane"></i> إرسال الطلب
-                </button>
-            </div>
-        </section>
-        
-        <!-- Stats Section -->
-        <section class="tab-content" id="stats-tab">
-            <div class="orders-section">
-                <h2 class="section-title">الطلبات السابقة</h2>
-                
-                <div class="orders-grid">
-                    <div class="order-card">
-                        <h3>@tech_channel</h3>
-                        <div class="order-stat">
-                            <span>عدد المشاهدات المطلوبة:</span>
-                            <span class="stat-value">5000</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>المشاهدات المضافة:</span>
-                            <span class="stat-value">4872</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>تاريخ الانتهاء:</span>
-                            <span class="stat-value">15/09/2025</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>الحالة:</span>
-                            <span class="stat-value">قيد التنفيذ</span>
-                        </div>
-                    </div>
-                    
-                    <div class="order-card">
-                        <h3>@news_arabic</h3>
-                        <div class="order-stat">
-                            <span>عدد المشاهدات المطلوبة:</span>
-                            <span class="stat-value">10000</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>المشاهدات المضافة:</span>
-                            <span class="stat-value">10000</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>تاريخ الانتهاء:</span>
-                            <span class="stat-value">10/08/2025</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>الحالة:</span>
-                            <span class="stat-value">مكتمل</span>
-                        </div>
-                    </div>
-                    
-                    <div class="order-card">
-                        <h3>@music_lovers</h3>
-                        <div class="order-stat">
-                            <span>عدد المشاهدات المطلوبة:</span>
-                            <span class="stat-value">2500</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>المشاهدات المضافة:</span>
-                            <span class="stat-value">2500</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>تاريخ الانتهاء:</span>
-                            <span class="stat-value">05/10/2025</span>
-                        </div>
-                        <div class="order-stat">
-                            <span>الحالة:</span>
-                            <span class="stat-value">مكتمل</span>
-                        </div>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗃️</div>
+                    <h3>قواعد البيانات</h3>
+                    <p>أنشئ وأدر قواعد بيانات MySQL/PostgreSQL بسهولة من لوحة التحكم</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>نطاق فرعي</h3>
+                    <p>احصل على نطاق فرعي مجاني لموقعك مع خيار ربط نطاق مخصص خاص بك</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>إحصائيات متقدمة</h3>
+                    <p>تابع أداء موقعك مع إحصائيات مفصلة عن الزيارات، التخزين والاستخدام</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>ذكاء اصطناعي</h3>
+                    <p>استفد من نظام ذكي لتحسين الأداء واكتشاف المشكلات تلقائياً</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>أمان متقدم</h3>
+                    <p>حماية متقدمة من الاختراق والهجمات الإلكترونية مع مراقبة مستمرة</p>
                 </div>
             </div>
-        </section>
-        
-        <!-- Proxy Section -->
-        <section class="tab-content" id="proxy-info-tab">
-            <div class="orders-section">
-                <h2 class="section-title">حالة نظام البروكسي</h2>
-                
-                <div class="proxy-status">
-                    <h3>النظام يعمل بشكل تلقائي</h3>
-                    <p>لا حاجة للقلق حول البروكسي، نظامنا يقوم بكل العمل خلف الكواليس</p>
-                    <p class="status-active">الحالة: نشط ومخفي - يعمل على زيادة المشاهدات</p>
-                </div>
-                
-                <div class="form-group">
-                    <label for="proxy-status">معلومات البروكسي (للإدارة فقط):</label>
-                    <input type="text" id="proxy-status-input" value="نظام بروكسي آمن ومخفي - يعمل تلقائياً" disabled>
-                </div>
-                
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>عدد البروكسيات النشطة:</label>
-                        <input type="text" value="68 بروكسي" disabled>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>الطلب الحالي قيد المعالجة:</label>
-                        <input type="text" value="قناة @example - 7500 مشاهدة" disabled>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>المشاهدات المضافة اليوم:</label>
-                        <input type="text" value="18,425 مشاهدة" disabled>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>حالة النظام:</label>
-                        <input type="text" value="يعمل بشكل مثالي" disabled>
-                    </div>
-                </div>
+        </div>
+    </section>
+
+    <!-- نماذج الدخول والتسجيل -->
+    <div class="overlay" id="overlay"></div>
+
+    <div class="auth-forms" id="login-form">
+        <div class="form-header">
+            <h3>تسجيل الدخول</h3>
+            <button class="close-form">&times;</button>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="login-email">البريد الإلكتروني</label>
+                <input type="email" id="login-email" required>
             </div>
-        </section>
+            <div class="form-group">
+                <label for="login-password">كلمة المرور</label>
+                <input type="password" id="login-password" required>
+            </div>
+            <button type="submit" class="form-submit">دخول</button>
+            <div class="form-footer">
+                <p>ليس لديك حساب؟ <a id="switch-to-register">إنشاء حساب</a></p>
+            </div>
+        </form>
     </div>
-    
-    <!-- Footer -->
+
+    <div class="auth-forms" id="register-form">
+        <div class="form-header">
+            <h3>إنشاء حساب جديد</h3>
+            <button class="close-form">&times;</button>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="register-name">الاسم الكامل</label>
+                <input type="text" id="register-name" required>
+            </div>
+            <div class="form-group">
+                <label for="register-email">البريد الإلكتروني</label>
+                <input type="email" id="register-email" required>
+            </div>
+            <div class="form-group">
+                <label for="register-password">كلمة المرور</label>
+                <input type="password" id="register-password" required>
+            </div>
+            <div class="form-group">
+                <label for="register-confirm-password">تأكيد كلمة المرور</label>
+                <input type="password" id="register-confirm-password" required>
+            </div>
+            <button type="submit" class="form-submit">إنشاء حساب</button>
+            <div class="form-footer">
+                <p>لديك حساب بالفعل؟ <a id="switch-to-login">تسجيل الدخول</a></p>
+            </div>
+        </form>
+    </div>
+
+    <!-- التذييل -->
     <footer>
-        <div class="container footer-content">
-            <div class="copyright">
-                جميع الحقوق محفوظة &copy; 2025 - <span>أسامة ليث</span>
-            </div>
-            
-            <div class="footer-links">
-                <a href="https://t.me/QEQQ6" target="_blank">قناة التليجرام</a>
-                <a href="https://t.me/QNQQ8" target="_blank">تواصل مع المطور</a>
-                <a href="https://instagram.com/5T_O8" target="_blank">انستجرام المطور</a>
-            </div>
-            
-            <div class="developer">
-                تم التطوير بواسطة: أسامة ليث
-            </div>
+        <div class="container">
+            <p>© 2023 استضافة ويب. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <script>
-        // تنبيه الإشعارات
-        function showNotification(message, type = '') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = 'notification ' + type;
-            notification.style.display = 'block';
-            
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
+        // إدارة نماذج الدخول والتسجيل
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const overlay = document.getElementById('overlay');
+        const closeFormBtns = document.querySelectorAll('.close-form');
+        const switchToRegister = document.getElementById('switch-to-register');
+        const switchToLogin = document.getElementById('switch-to-login');
+        
+        function showForm(form) {
+            overlay.classList.add('active');
+            form.classList.add('active');
         }
         
-        // تهيئة التاريخ الحالي
-        function setCurrentDate() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = (now.getMonth() + 1).toString().padStart(2, '0');
-            const day = now.getDate().toString().padStart(2, '0');
-            const today = `${year}-${month}-${day}`;
-            
-            // تعيين الحد الأدنى لتاريخ الإيقاف إلى اليوم
-            document.getElementById('stop-date').setAttribute('min', today);
-            
-            // تحديث التواريخ في الطلبات إلى 2025
-            document.querySelectorAll('.order-stat .stat-value').forEach(el => {
-                if (el.textContent.includes('2023')) {
-                    el.textContent = el.textContent.replace('2023', '2025');
-                }
-            });
+        function hideForms() {
+            overlay.classList.remove('active');
+            loginForm.classList.remove('active');
+            registerForm.classList.remove('active');
         }
         
-        // التنقل بين الأقسام
-        function setupNavigation() {
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // إزالة النشط من جميع الروابط
-                    document.querySelectorAll('nav a').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    
-                    // إضافة النشط للرابط الحالي
-                    this.classList.add('active');
-                    
-                    // إخفاء جميع محتويات التبويبات
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // إخفاء جميع التبويبات
-                    document.querySelectorAll('.tab').forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-                    
-                    // إظهار القسم المطلوب
-                    const section = this.getAttribute('data-section');
-                    if (section === 'home') {
-                        document.getElementById('order-tab').classList.add('active');
-                        document.querySelector('.tab[data-tab="order"]').classList.add('active');
-                    } else if (section === 'orders') {
-                        document.getElementById('stats-tab').classList.add('active');
-                        document.querySelector('.tab[data-tab="stats"]').classList.add('active');
-                    } else if (section === 'proxy') {
-                        document.getElementById('proxy-info-tab').classList.add('active');
-                        document.querySelector('.tab[data-tab="proxy-info"]').classList.add('active');
-                    }
-                });
-            });
-        }
+        loginBtn.addEventListener('click', () => showForm(loginForm));
+        registerBtn.addEventListener('click', () => showForm(registerForm));
         
-        // نظام التبويبات
-        function setupTabs() {
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // إزالة النشط من جميع التبويبات
-                    document.querySelectorAll('.tab').forEach(t => {
-                        t.classList.remove('active');
-                    });
-                    
-                    // إضافة النشط للتبويب الحالي
-                    this.classList.add('active');
-                    
-                    // إخفاء جميع محتويات التبويبات
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // إظهار المحتوى المرتبط بالتبويب
-                    const tabId = this.getAttribute('data-tab');
-                    document.getElementById(`${tabId}-tab`).classList.add('active');
-                });
-            });
-        }
-        
-        // معالجة إرسال النموذج
-        function setupForm() {
-            document.getElementById('submit-btn').addEventListener('click', function() {
-                const channel = document.getElementById('channel').value;
-                const views = document.getElementById('views').value;
-                const stopDate = document.getElementById('stop-date').value;
-                const duration = document.getElementById('duration').value;
-                
-                if (!channel || !views || !stopDate || !duration) {
-                    showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
-                    return;
-                }
-                
-                if (!channel.startsWith('@')) {
-                    showNotification('يجب أن يبدأ اسم القناة بـ @', 'error');
-                    return;
-                }
-                
-                if (views < 100) {
-                    showNotification('الحد الأدنى لعدد المشاهدات هو 100', 'error');
-                    return;
-                }
-                
-                if (duration < 10) {
-                    showNotification('الحد الأدنى لمدة الإكمال هو 10 دقائق', 'error');
-                    return;
-                }
-                
-                // محاكاة إرسال الطلب
-                const originalText = this.innerHTML;
-                this.innerHTML = '<span class="spinner"></span> جاري المعالجة...';
-                this.disabled = true;
-                
-                setTimeout(() => {
-                    showNotification('تم استلام طلبك بنجاح! سيبدأ نظامنا بمعالجة طلبك قريباً.', 'success');
-                    this.innerHTML = originalText;
-                    this.disabled = false;
-                    
-                    // مسح الحقول
-                    document.getElementById('channel').value = '';
-                    document.getElementById('views').value = '';
-                    document.getElementById('stop-date').value = '';
-                    document.getElementById('duration').value = '';
-                }, 2000);
-            });
-        }
-        
-        // محاكاة تحديث حالة البروكسي
-        function setupProxyStatus() {
-            setInterval(() => {
-                const statusText = document.querySelector('.proxy-status .status-active');
-                if (statusText) {
-                    const texts = [
-                        "الحالة: نشط ومخفي - يعمل على زيادة المشاهدات",
-                        "الحالة: نشط - جاري معالجة 7 طلبات",
-                        "الحالة: نشط - جديد: 2450 مشاهدة تمت إضافتها",
-                        "الحالة: نشط - يعمل بشكل مثالي"
-                    ];
-                    const randomText = texts[Math.floor(Math.random() * texts.length)];
-                    statusText.textContent = randomText;
-                }
-            }, 5000);
-        }
-        
-        // تهيئة الصفحة عند التحميل
-        document.addEventListener('DOMContentLoaded', function() {
-            setCurrentDate();
-            setupNavigation();
-            setupTabs();
-            setupForm();
-            setupProxyStatus();
+        closeFormBtns.forEach(btn => {
+            btn.addEventListener('click', hideForms);
         });
+        
+        overlay.addEventListener('click', hideForms);
+        
+        switchToRegister.addEventListener('click', () => {
+            loginForm.classList.remove('active');
+            registerForm.classList.add('active');
+        });
+        
+        switchToLogin.addEventListener('click', () => {
+            registerForm.classList.remove('active');
+            loginForm.classList.add('active');
+        });
+        
+        // منع إغلاق النموذج عند النقر داخله
+        loginForm.addEventListener('click', (e) => e.stopPropagation());
+        registerForm.addEventListener('click', (e) => e.stopPropagation());
     </script>
 </body>
-                    </html>
+    </html>
